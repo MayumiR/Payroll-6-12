@@ -45,7 +45,14 @@ public  class AttendanceDAOImpl implements AttendanceDAO{
 
     @Override
     public Attendance search(String id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+           ResultSet rst = CrudUtil.executeQuery("Select count(Id) as present From Attendance where DayStatus= '1' and EmpId = ?", id);
+        Attendance attendance = new Attendance();
+       if (rst.next()) {
+           attendance.setCount(rst.getInt(0));
+            return attendance;
+        } else {
+            return null;
+        } 
     }
 
     @Override

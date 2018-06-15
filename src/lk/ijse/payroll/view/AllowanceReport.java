@@ -230,8 +230,6 @@ public class AllowanceReport extends javax.swing.JFrame {
     }//GEN-LAST:event_ComboBoxEmpNameActionPerformed
 
     private void BtnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnViewActionPerformed
-        if(employeeName.equals("") && TextFieldDateOfBirth.equals("")){
-            //methana enna ona serama filter wena allowance report eka
         InputStream input=getClass().getResourceAsStream("/lk/ijse/payroll/report/AllowanceRepo.jasper");
        HashMap map=new HashMap();
        try {
@@ -243,11 +241,6 @@ public class AllowanceReport extends javax.swing.JFrame {
             Logger.getLogger(EmployeeSalary.class.getName()).log(Level.SEVERE, null, ex);
         } catch (JRException ex) {
             Logger.getLogger(EmployeeSalary.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        }else if(TextFieldDateOfBirth.equals("")){
-             //methana enna ona name ekata filter wena allowance report eka
-        }else{
-            //methana enna ona name ekata filter wena allowance report eka
         }
     }//GEN-LAST:event_BtnViewActionPerformed
 

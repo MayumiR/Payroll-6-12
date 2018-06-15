@@ -26,7 +26,7 @@ public class EmployeeLoan extends javax.swing.JPanel {
     public EmployeeLoan() {
         initComponents();
         loadEmployeeNames();
-        AutoCompleteDecorator.decorate(jComboBoxEmpName);
+        AutoCompleteDecorator.decorate(ComboBoxEmpName);
     }
 
     /**
@@ -45,7 +45,7 @@ public class EmployeeLoan extends javax.swing.JPanel {
         jSeparator4 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jPanel2 = new javax.swing.JPanel();
-        jComboBoxEmpName = new javax.swing.JComboBox<>();
+        ComboBoxEmpName = new javax.swing.JComboBox<>();
         jLabelDesignation = new javax.swing.JLabel();
         jLabelEmployeeName = new javax.swing.JLabel();
         jSeparator21 = new javax.swing.JSeparator();
@@ -61,6 +61,8 @@ public class EmployeeLoan extends javax.swing.JPanel {
         LblLoan = new javax.swing.JLabel();
         TxtLoanId = new javax.swing.JTextField();
         jSeparator23 = new javax.swing.JSeparator();
+        jLabelEmployeeName1 = new javax.swing.JLabel();
+        ComboAmount = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1156, 760));
@@ -98,14 +100,14 @@ public class EmployeeLoan extends javax.swing.JPanel {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Employee Details", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Yu Gothic UI", 0, 12))); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jComboBoxEmpName.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
-        jComboBoxEmpName.setForeground(new java.awt.Color(31, 58, 147));
-        jComboBoxEmpName.addActionListener(new java.awt.event.ActionListener() {
+        ComboBoxEmpName.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
+        ComboBoxEmpName.setForeground(new java.awt.Color(31, 58, 147));
+        ComboBoxEmpName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxEmpNameActionPerformed(evt);
+                ComboBoxEmpNameActionPerformed(evt);
             }
         });
-        jPanel2.add(jComboBoxEmpName, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 180, 30));
+        jPanel2.add(ComboBoxEmpName, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 180, 30));
 
         jLabelDesignation.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
         jLabelDesignation.setForeground(new java.awt.Color(31, 58, 147));
@@ -206,13 +208,28 @@ public class EmployeeLoan extends javax.swing.JPanel {
         jSeparator23.setOpaque(true);
         jPanel2.add(jSeparator23, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 190, 50, -1));
 
-        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 100, 730, 220));
+        jLabelEmployeeName1.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
+        jLabelEmployeeName1.setForeground(new java.awt.Color(31, 58, 147));
+        jLabelEmployeeName1.setText("Amount");
+        jPanel2.add(jLabelEmployeeName1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 130, 30));
+
+        ComboAmount.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
+        ComboAmount.setForeground(new java.awt.Color(31, 58, 147));
+        ComboAmount.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "50000", "100000", "150000" }));
+        ComboAmount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboAmountActionPerformed(evt);
+            }
+        });
+        jPanel2.add(ComboAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, 180, 30));
+
+        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 100, 730, 260));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBoxEmpNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEmpNameActionPerformed
-        employeeName = jComboBoxEmpName.getSelectedItem().toString();
+    private void ComboBoxEmpNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxEmpNameActionPerformed
+        employeeName = ComboBoxEmpName.getSelectedItem().toString();
         try {
-            String empoyeeName=(String) jComboBoxEmpName.getSelectedItem();
+            String empoyeeName=(String) ComboBoxEmpName.getSelectedItem();
             EmployeeDTO employee=EmployeeRegisterController.searchEmployee(empoyeeName);
             if(employee!=null){
                 TxtEmployeeId.setText(employee.getId());
@@ -222,7 +239,7 @@ public class EmployeeLoan extends javax.swing.JPanel {
         } catch (Exception ex) {
             Logger.getLogger(EmployeeAllowance.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jComboBoxEmpNameActionPerformed
+    }//GEN-LAST:event_ComboBoxEmpNameActionPerformed
 
     private void TxtSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtSalaryActionPerformed
         // TODO add your handling code here:
@@ -244,15 +261,20 @@ public class EmployeeLoan extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtLoanIdActionPerformed
 
+    private void ComboAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboAmountActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboAmountActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> ComboAmount;
+    private javax.swing.JComboBox<String> ComboBoxEmpName;
     private org.jdesktop.swingx.JXDatePicker DatePickerAllowanceDate;
     private javax.swing.JLabel LblLoan;
     private javax.swing.JTextField TxtDesignation;
     private javax.swing.JTextField TxtEmployeeId;
     private javax.swing.JTextField TxtLoanId;
     private javax.swing.JTextField TxtSalary;
-    private javax.swing.JComboBox<String> jComboBoxEmpName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -261,6 +283,7 @@ public class EmployeeLoan extends javax.swing.JPanel {
     private javax.swing.JLabel jLabelEmpAtt;
     private javax.swing.JLabel jLabelEmployeeID;
     private javax.swing.JLabel jLabelEmployeeName;
+    private javax.swing.JLabel jLabelEmployeeName1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator2;
@@ -275,7 +298,7 @@ public class EmployeeLoan extends javax.swing.JPanel {
         try {
             ArrayList<String>employeeNames=EmployeeRegisterController.getAllEmployeeNames();
             for (String employeeName : employeeNames) {
-                jComboBoxEmpName.addItem(employeeName);
+                ComboBoxEmpName.addItem(employeeName);
             }
         } catch (Exception ex) {
             Logger.getLogger(EmployeeAttendance.class.getName()).log(Level.SEVERE, null, ex);

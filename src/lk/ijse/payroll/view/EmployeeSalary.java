@@ -43,6 +43,18 @@ public class EmployeeSalary extends javax.swing.JPanel {
         initComponents();
         loadEmployeeName();
         genarateSalaryId();
+        
+        
+        double salary  = Double.parseDouble(TxtBasicSalary.getText());
+                double percentageEtf = 3,percentageEpf=8, percentageEpf2=12 ;
+                
+                double etf = (salary * percentageEtf)/100;
+                double epf=(salary * percentageEpf )/100;
+                double epf2= (salary * percentageEpf2 )/100;
+                
+                Txtepf.setText(""+epf);
+                TxtETF.setText(""+etf);
+                Txtepff.setText(""+epf2);
     }
 
     /** This method is called from within the constructor to
@@ -121,9 +133,9 @@ public class EmployeeSalary extends javax.swing.JPanel {
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jSeparator25 = new javax.swing.JSeparator();
-        jTextFieldEPF1 = new javax.swing.JTextField();
+        Txtepf = new javax.swing.JTextField();
         jSeparator26 = new javax.swing.JSeparator();
-        jTextFieldEPF2 = new javax.swing.JTextField();
+        Txtepff = new javax.swing.JTextField();
         jSeparator27 = new javax.swing.JSeparator();
         TxtETF = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
@@ -569,30 +581,30 @@ public class EmployeeSalary extends javax.swing.JPanel {
         jSeparator25.setOpaque(true);
         jPanel1.add(jSeparator25, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 80, -1));
 
-        jTextFieldEPF1.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
-        jTextFieldEPF1.setForeground(new java.awt.Color(31, 58, 147));
-        jTextFieldEPF1.setBorder(null);
-        jTextFieldEPF1.addActionListener(new java.awt.event.ActionListener() {
+        Txtepf.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
+        Txtepf.setForeground(new java.awt.Color(31, 58, 147));
+        Txtepf.setBorder(null);
+        Txtepf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldEPF1ActionPerformed(evt);
+                TxtepfActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextFieldEPF1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 80, 30));
+        jPanel1.add(Txtepf, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 80, 30));
 
         jSeparator26.setBackground(new java.awt.Color(31, 58, 147));
         jSeparator26.setForeground(new java.awt.Color(31, 58, 147));
         jSeparator26.setOpaque(true);
         jPanel1.add(jSeparator26, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 80, -1));
 
-        jTextFieldEPF2.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
-        jTextFieldEPF2.setForeground(new java.awt.Color(31, 58, 147));
-        jTextFieldEPF2.setBorder(null);
-        jTextFieldEPF2.addActionListener(new java.awt.event.ActionListener() {
+        Txtepff.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
+        Txtepff.setForeground(new java.awt.Color(31, 58, 147));
+        Txtepff.setBorder(null);
+        Txtepff.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldEPF2ActionPerformed(evt);
+                TxtepffActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextFieldEPF2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 80, 30));
+        jPanel1.add(Txtepff, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 80, 30));
 
         jSeparator27.setBackground(new java.awt.Color(31, 58, 147));
         jSeparator27.setForeground(new java.awt.Color(31, 58, 147));
@@ -792,12 +804,6 @@ public class EmployeeSalary extends javax.swing.JPanel {
                 double netSalary= gross-totalDeduction;
                 TxtNetSalary.setText(""+netSalary);
                 
-                salary  = Double.parseDouble(TxtBasicSalary.getText());
-                double percentage = 3;
-                double etf = (salary * percentage)/100;
-                System.out.println(""+salary+","+etf);
-                TxtETF.setText(""+etf);
-              
             }
         } catch (Exception ex) {
             Logger.getLogger(EmployeeSalary.class.getName()).log(Level.SEVERE, null, ex);
@@ -825,13 +831,13 @@ public class EmployeeSalary extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_TxtDesignationKeyReleased
 
-    private void jTextFieldEPF1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldEPF1ActionPerformed
+    private void TxtepfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtepfActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldEPF1ActionPerformed
+    }//GEN-LAST:event_TxtepfActionPerformed
 
-    private void jTextFieldEPF2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldEPF2ActionPerformed
+    private void TxtepffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtepffActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldEPF2ActionPerformed
+    }//GEN-LAST:event_TxtepffActionPerformed
 
     private void TxtETFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtETFActionPerformed
         
@@ -839,18 +845,18 @@ public class EmployeeSalary extends javax.swing.JPanel {
     }//GEN-LAST:event_TxtETFActionPerformed
 
     private void ButtonAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonAdd1ActionPerformed
-        InputStream input=getClass().getResourceAsStream("/lk/ijse/payroll/report/paySlip.jasper");
-       HashMap map=new HashMap();
-       try {
-            JasperPrint jasperPrint=JasperFillManager.fillReport(input, map,DBConnection.getInstance().getConnection());
-            JasperViewer.viewReport(jasperPrint);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(EmployeeSalary.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(EmployeeSalary.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JRException ex) {
-            Logger.getLogger(EmployeeSalary.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        InputStream input=getClass().getResourceAsStream("/lk/ijse/payroll/report/paySlip.jasper");
+//       HashMap map=new HashMap();
+//       try {
+//            JasperPrint jasperPrint=JasperFillManager.fillReport(input, map,DBConnection.getInstance().getConnection());
+//            JasperViewer.viewReport(jasperPrint);
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(EmployeeSalary.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (SQLException ex) {
+//            Logger.getLogger(EmployeeSalary.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (JRException ex) {
+//            Logger.getLogger(EmployeeSalary.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }//GEN-LAST:event_ButtonAdd1ActionPerformed
 
 
@@ -875,6 +881,8 @@ public class EmployeeSalary extends javax.swing.JPanel {
     private javax.swing.JTextField TxtTotalDeducton;
     private javax.swing.JTextField TxtVehicleAllowance;
     private javax.swing.JTextField TxtWelfare;
+    private javax.swing.JTextField Txtepf;
+    private javax.swing.JTextField Txtepff;
     private javax.swing.JComboBox<String> jComboBoxEmpName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -927,8 +935,6 @@ public class EmployeeSalary extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
-    private javax.swing.JTextField jTextFieldEPF1;
-    private javax.swing.JTextField jTextFieldEPF2;
     // End of variables declaration//GEN-END:variables
 
     private void loadEmployeeName() {

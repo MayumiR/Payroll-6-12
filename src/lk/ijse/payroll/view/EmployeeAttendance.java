@@ -5,8 +5,8 @@
  */
 package lk.ijse.payroll.view;
 
+import com.sun.management.jmx.Trace;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -52,10 +52,10 @@ public class EmployeeAttendance extends javax.swing.JPanel {
         loadEmployeeName();
         groupButtonAttendance();
         attendanceId();
-        tableView();
+        //tableView();
         AutoCompleteDecorator.decorate(jComboBoxEmpName);
         employeeBO = new EmployeeBOImpl();
-        dtm=(DefaultTableModel) TableAttendance.getModel();
+       // dtm=(DefaultTableModel) TableAttendance.getModel();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -100,11 +100,15 @@ public class EmployeeAttendance extends javax.swing.JPanel {
         ToggleButtonOutTime = new javax.swing.JToggleButton();
         ToggleButtonInTime = new javax.swing.JToggleButton();
         DateLbl = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        TableAttendance = new org.jdesktop.swingx.JXTable();
+        jLabelDesignation3 = new javax.swing.JLabel();
+        TxtPresentDays = new javax.swing.JTextField();
+        jSeparator20 = new javax.swing.JSeparator();
+        jLabelDesignation4 = new javax.swing.JLabel();
+        TxtLeaveDays = new javax.swing.JTextField();
+        jSeparator21 = new javax.swing.JSeparator();
         BtnAdd1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1156, 760));
@@ -334,28 +338,56 @@ public class EmployeeAttendance extends javax.swing.JPanel {
         DateLbl.setForeground(new java.awt.Color(31, 58, 147));
         jXPanel1.add(DateLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 204, 190, 30));
 
+        jTextField1.setText("jTextField1");
+        jXPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 320, -1, -1));
+
         add(jXPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 1060, 280));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Attendance List", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Yu Gothic UI Light", 1, 14))); // NOI18N
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        TableAttendance.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "EID", "Name", "Designation", "Date", "Attendance", "In-Time", "Out-Time"
+        jLabelDesignation3.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
+        jLabelDesignation3.setForeground(new java.awt.Color(31, 58, 147));
+        jLabelDesignation3.setText("Current Month Leave Days");
+        jPanel1.add(jLabelDesignation3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 250, 30));
+
+        TxtPresentDays.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
+        TxtPresentDays.setForeground(new java.awt.Color(31, 58, 147));
+        TxtPresentDays.setBorder(null);
+        TxtPresentDays.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TxtPresentDaysKeyReleased(evt);
             }
-        ));
-        jScrollPane2.setViewportView(TableAttendance);
+        });
+        jPanel1.add(TxtPresentDays, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 60, 50, 30));
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 1040, 160));
+        jSeparator20.setBackground(new java.awt.Color(0, 139, 139));
+        jSeparator20.setForeground(new java.awt.Color(31, 58, 147));
+        jSeparator20.setOpaque(true);
+        jPanel1.add(jSeparator20, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, 50, -1));
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 450, 1060, 200));
+        jLabelDesignation4.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
+        jLabelDesignation4.setForeground(new java.awt.Color(31, 58, 147));
+        jLabelDesignation4.setText("Current Month Present Days");
+        jPanel1.add(jLabelDesignation4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 250, 30));
+
+        TxtLeaveDays.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
+        TxtLeaveDays.setForeground(new java.awt.Color(31, 58, 147));
+        TxtLeaveDays.setBorder(null);
+        TxtLeaveDays.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TxtLeaveDaysKeyReleased(evt);
+            }
+        });
+        jPanel1.add(TxtLeaveDays, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, 50, 30));
+
+        jSeparator21.setBackground(new java.awt.Color(0, 139, 139));
+        jSeparator21.setForeground(new java.awt.Color(31, 58, 147));
+        jSeparator21.setOpaque(true);
+        jPanel1.add(jSeparator21, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 150, 50, -1));
+
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 470, 1060, 230));
 
         BtnAdd1.setBackground(new java.awt.Color(31, 58, 147));
         BtnAdd1.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 14)); // NOI18N
@@ -367,16 +399,6 @@ public class EmployeeAttendance extends javax.swing.JPanel {
             }
         });
         add(BtnAdd1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 410, 130, 30));
-
-        jLabel1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 11)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Attendance");
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
-            }
-        });
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 80, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAddActionPerformed
@@ -396,7 +418,7 @@ public class EmployeeAttendance extends javax.swing.JPanel {
                 if(validation()){
                     if (result){
                         JOptionPane.showMessageDialog(this, "Saved successfully");
-                        tableView();
+                        //tableView();
                         clearTextFields();
                         attendanceId();
                         
@@ -416,6 +438,9 @@ public class EmployeeAttendance extends javax.swing.JPanel {
 
     private void RadioButtonPrasentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioButtonPrasentActionPerformed
         dayStatus=1;
+//        if(RadioButtonPrasent==isSelected()){
+//            
+//        }
     }//GEN-LAST:event_RadioButtonPrasentActionPerformed
 
     private void RadioButtonLeaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioButtonLeaveActionPerformed
@@ -493,15 +518,13 @@ public class EmployeeAttendance extends javax.swing.JPanel {
         dayType="Half Day";
     }//GEN-LAST:event_CheckBoxHalfActionPerformed
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-//        Attendance attendance=new Attendance();
-//        AllLoadpnl.removeAll();
-//        attendance.setSize(AllLoadpnl.getSize());
-//        attendance.setVisible(true);
-//        AllLoadpnl.add(attendance);
-//        AllLoadpnl.revalidate();
-//        AllLoadpnl.repaint();
-    }//GEN-LAST:event_jLabel1MouseClicked
+    private void TxtPresentDaysKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtPresentDaysKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtPresentDaysKeyReleased
+
+    private void TxtLeaveDaysKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtLeaveDaysKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtLeaveDaysKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -515,33 +538,37 @@ public class EmployeeAttendance extends javax.swing.JPanel {
     private javax.swing.JLabel OutTimeLbl;
     private javax.swing.JRadioButton RadioButtonLeave;
     private javax.swing.JRadioButton RadioButtonPrasent;
-    private org.jdesktop.swingx.JXTable TableAttendance;
     private javax.swing.JToggleButton ToggleButtonInTime;
     private javax.swing.JToggleButton ToggleButtonOutTime;
     private javax.swing.JTextField TxtDesignation;
     private javax.swing.JTextField TxtEmployeeId;
+    private javax.swing.JTextField TxtLeaveDays;
+    private javax.swing.JTextField TxtPresentDays;
     private javax.swing.JComboBox<String> jComboBoxEmpName;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelDesignation;
     private javax.swing.JLabel jLabelDesignation1;
     private javax.swing.JLabel jLabelDesignation2;
+    private javax.swing.JLabel jLabelDesignation3;
+    private javax.swing.JLabel jLabelDesignation4;
     private javax.swing.JLabel jLabelEmpAtt;
     private javax.swing.JLabel jLabelEmployeeID;
     private javax.swing.JLabel jLabelEmployeeName;
     private javax.swing.JLabel jLabelEmployeeName1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator16;
     private javax.swing.JSeparator jSeparator17;
     private javax.swing.JSeparator jSeparator18;
     private javax.swing.JSeparator jSeparator19;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator20;
+    private javax.swing.JSeparator jSeparator21;
     private javax.swing.JSeparator jSeparator22;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextFieldAttendanceId;
     private org.jdesktop.swingx.JXPanel jXPanel1;
     // End of variables declaration//GEN-END:variables
@@ -582,33 +609,33 @@ public class EmployeeAttendance extends javax.swing.JPanel {
         }
     }
    
-    private void tableView() {
-        try {
-
-            ArrayList<AttendanceDTO> allAttendances= EmployeeAttendanceController.getAttendance();
-            dtm = (DefaultTableModel) TableAttendance.getModel();
-            dtm.setRowCount(0);
-            if(allAttendances==null){return;}
-            
-                dtm.setRowCount(0);
-            for (AttendanceDTO attendance : allAttendances) {
-
-                    Object[] rowData = {
-                        attendance.getEmployeeId(),
-                        EmployeeRegisterController.searchEmployeeID(attendance.getEmployeeId()).getName(),
-                        EmployeeRegisterController.searchEmployeeID(attendance.getEmployeeId()).getDesignation(),
-                        attendance.getDate(),
-                        attendance.getDayStatus(),
-                        attendance.getInTime(),
-                        attendance.getOutTime()
-                    };
-                    dtm.addRow(rowData);
-
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(EmployeeRegister.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+//    private void tableView() {
+//        try {
+//
+//            ArrayList<AttendanceDTO> allAttendances= EmployeeAttendanceController.getAttendance();
+//            //dtm = (DefaultTableModel) TableAttendance.getModel();
+//            dtm.setRowCount(0);
+//            if(allAttendances==null){return;}
+//            
+//                dtm.setRowCount(0);
+//            for (AttendanceDTO attendance : allAttendances) {
+//
+//                    Object[] rowData = {
+//                        attendance.getEmployeeId(),
+//                        EmployeeRegisterController.searchEmployeeID(attendance.getEmployeeId()).getName(),
+//                        EmployeeRegisterController.searchEmployeeID(attendance.getEmployeeId()).getDesignation(),
+//                        attendance.getDate(),
+//                        attendance.getDayStatus(),
+//                        attendance.getInTime(),
+//                        attendance.getOutTime()
+//                    };
+//                    dtm.addRow(rowData);
+//
+//            }
+//        } catch (Exception ex) {
+//            Logger.getLogger(EmployeeRegister.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
     
     public void clearTextFields(){
         TxtEmployeeId.setText("");

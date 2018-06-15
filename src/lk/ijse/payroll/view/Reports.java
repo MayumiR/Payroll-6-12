@@ -38,32 +38,69 @@ public class Reports extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        attendance = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        BtnEmployeeDetails = new javax.swing.JButton();
+        BtnAttendance = new javax.swing.JButton();
+        BtnDeduction = new javax.swing.JButton();
+        BtnAllowance = new javax.swing.JButton();
+        BtnOt = new javax.swing.JButton();
+        BtnLt = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1156, 760));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        attendance.setText("EmployeeDetails");
-        attendance.addActionListener(new java.awt.event.ActionListener() {
+        BtnEmployeeDetails.setText("EmployeeDetails");
+        BtnEmployeeDetails.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                attendanceActionPerformed(evt);
+                BtnEmployeeDetailsActionPerformed(evt);
             }
         });
-        add(attendance, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 140, 30));
+        add(BtnEmployeeDetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 140, 30));
 
-        jButton2.setText("Attendance");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        BtnAttendance.setText("Attendance");
+        BtnAttendance.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                BtnAttendanceActionPerformed(evt);
             }
         });
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 140, 30));
+        add(BtnAttendance, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 140, 30));
+
+        BtnDeduction.setText("Deduction");
+        BtnDeduction.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnDeductionActionPerformed(evt);
+            }
+        });
+        add(BtnDeduction, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 123, 110, 30));
+
+        BtnAllowance.setText("Allowance");
+        BtnAllowance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAllowanceActionPerformed(evt);
+            }
+        });
+        add(BtnAllowance, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 123, 110, 30));
+
+        BtnOt.setText("Ot Hours");
+        BtnOt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnOtActionPerformed(evt);
+            }
+        });
+        add(BtnOt, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 173, 130, 30));
+
+        BtnLt.setText("Late Hours");
+        BtnLt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnLtActionPerformed(evt);
+            }
+        });
+        add(BtnLt, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 173, 140, 30));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void attendanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attendanceActionPerformed
-       InputStream input=getClass().getResourceAsStream("/lk/ijse/payroll/report/employeeDetails_1.jasper");
+    private void BtnEmployeeDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEmployeeDetailsActionPerformed
+      
+       InputStream input=getClass().getResourceAsStream("/lk/ijse/payroll/report/employeeDetails.jasper");
        HashMap map=new HashMap();
        try {
             JasperPrint jasperPrint=JasperFillManager.fillReport(input, map,DBConnection.getInstance().getConnection());
@@ -75,26 +112,40 @@ public class Reports extends javax.swing.JPanel {
         } catch (JRException ex) {
             Logger.getLogger(EmployeeSalary.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_attendanceActionPerformed
+    }//GEN-LAST:event_BtnEmployeeDetailsActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       InputStream input=getClass().getResourceAsStream("/lk/ijse/payroll/report/employeeAttendance.jasper");
-       HashMap map=new HashMap();
-       try {
-            JasperPrint jasperPrint=JasperFillManager.fillReport(input, map,DBConnection.getInstance().getConnection());
-            JasperViewer.viewReport(jasperPrint);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(EmployeeSalary.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) { 
-            Logger.getLogger(EmployeeSalary.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JRException ex) {
-            Logger.getLogger(EmployeeSalary.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void BtnAttendanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAttendanceActionPerformed
+       AttendanceReport attendanceReport=new AttendanceReport();
+       attendanceReport.setVisible(true);
+    }//GEN-LAST:event_BtnAttendanceActionPerformed
+
+    private void BtnDeductionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDeductionActionPerformed
+       DeductionReport deductionReport=new DeductionReport();
+       deductionReport.setVisible(true);
+    }//GEN-LAST:event_BtnDeductionActionPerformed
+
+    private void BtnAllowanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllowanceActionPerformed
+       AllowanceReport allowanceReport=new AllowanceReport();
+       allowanceReport.setVisible(true);
+    }//GEN-LAST:event_BtnAllowanceActionPerformed
+
+    private void BtnOtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnOtActionPerformed
+       OtHoursReport otHoursReport=new OtHoursReport();
+       otHoursReport.setVisible(true);
+    }//GEN-LAST:event_BtnOtActionPerformed
+
+    private void BtnLtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLtActionPerformed
+        LatehoursReport latehoursReport=new LatehoursReport();
+        latehoursReport.setVisible(true);
+    }//GEN-LAST:event_BtnLtActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton attendance;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton BtnAllowance;
+    private javax.swing.JButton BtnAttendance;
+    private javax.swing.JButton BtnDeduction;
+    private javax.swing.JButton BtnEmployeeDetails;
+    private javax.swing.JButton BtnLt;
+    private javax.swing.JButton BtnOt;
     // End of variables declaration//GEN-END:variables
 }

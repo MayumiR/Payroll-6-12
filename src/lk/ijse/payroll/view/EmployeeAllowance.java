@@ -905,7 +905,6 @@ public class EmployeeAllowance extends javax.swing.JPanel {
 //    }
 
     private double getOtTot(double rate, int hours) {
-        System.out.println(""+rate+","+hours);
         double desuctionAmt = rate * hours;
         return desuctionAmt;
     }

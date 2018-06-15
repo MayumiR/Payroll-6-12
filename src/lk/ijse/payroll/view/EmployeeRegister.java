@@ -512,7 +512,7 @@ public class EmployeeRegister extends javax.swing.JPanel {
 
             },
             new String [] {
-                "EID", "Name", "Dsignation", "Salary", "Status", "Address", "Contact No.", "Join Date", "Date Of Birth", "Gender", "Late Hours Rate", "Over Time Rate"
+                "            EID", "          Name ", "        Dsignation ", "        Salary        ", "       Status ", "      Address ", "    Contact No. ", "    Join Date ", "   Date Of Birth ", "       Gender ", "  Late Hours Rate ", "  Over Time Rate "
             }
         ));
         jScrollPane2.setViewportView(jTableEmployee);

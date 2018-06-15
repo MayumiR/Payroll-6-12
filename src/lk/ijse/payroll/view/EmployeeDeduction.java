@@ -592,9 +592,6 @@ public class EmployeeDeduction extends javax.swing.JPanel {
 
     private void jRadioButtonPercentageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPercentageActionPerformed
         if(jRadioButtonPercentage.isSelected()){
-            //TxtEPF_percentage.setEnabled(true);
-           // TxtWelfare_Percentage.setEnabled(true);
-            //TxtInsuarance_Percentage.setEnabled(true);
             TxtEPF_percentage.setVisible(true);
             TxtWelfare_Percentage.setVisible(true);
             TxtInsuarance_Percentage.setVisible(true);
@@ -838,7 +835,7 @@ public class EmployeeDeduction extends javax.swing.JPanel {
     }
 
     private double getLhTot(double rate, int hours) {
-       double desuctionAmt = rate * hours;
+        double desuctionAmt = rate * hours;
         return desuctionAmt;
     }
 

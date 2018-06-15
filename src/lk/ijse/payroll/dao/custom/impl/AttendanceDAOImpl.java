@@ -45,11 +45,16 @@ public  class AttendanceDAOImpl implements AttendanceDAO{
 
     @Override
     public Attendance search(String id) throws Exception {
-           ResultSet rst = CrudUtil.executeQuery("Select count(Id) as present From Attendance where DayStatus= '1' and EmpId = ?", id);
-        Attendance attendance = new Attendance();
-       if (rst.next()) {
-           attendance.setCount(rst.getInt(0));
-            return attendance;
+    ResultSet rst = CrudUtil.executeQuery("Select count(Id) as allAttendance, count(DayStatus) From Attendance where DayStatus= '1' and EmpId = ? and " +
+                " MONTH(date) = MONTH(CURRENT_DATE()) " +
+                " and YEAR(date) = YEAR(CURRENT_DATE())",id );
+      
+      Attendance atndnce = new Attendance();
+      if (rst.next()) {
+          
+          atndnce.setLeaveCount(rst.getInt(1) - rst.getInt(2));
+          atndnce.setPresentCount(rst.getInt(2));
+            return atndnce;
         } else {
             return null;
         } 
@@ -102,6 +107,11 @@ public  class AttendanceDAOImpl implements AttendanceDAO{
     public ArrayList<Attendance> getAllByIDandDate(String id, String date) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+  
+
+   
+
 
     
 }

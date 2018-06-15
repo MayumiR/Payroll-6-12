@@ -460,10 +460,13 @@ public class EmployeeAttendance extends javax.swing.JPanel {
         try {
             String empoyeeName=(String) jComboBoxEmpName.getSelectedItem();
             EmployeeDTO employee=EmployeeRegisterController.searchEmployee(empoyeeName);
+           
             if(employee!=null){
                 TxtEmployeeId.setText(employee.getId());
                 TxtDesignation.setText(employee.getDesignation());
-               
+                 AttendanceDTO attendanceDTO =EmployeeAttendanceController.getAttendanceCount(employee.getId());
+                 TxtLeaveDays.setText(""+attendanceDTO.getLeaveCount());
+                 TxtPresentDays.setText(""+attendanceDTO.getPresentCount());
             }
         } catch (Exception ex) {
             Logger.getLogger(EmployeeAllowance.class.getName()).log(Level.SEVERE, null, ex);

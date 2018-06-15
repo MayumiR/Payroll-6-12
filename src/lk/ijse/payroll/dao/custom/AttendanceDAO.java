@@ -13,5 +13,5 @@ import lk.ijse.payroll.entity.Attendance;
  * @author Chamil
  */
 public interface AttendanceDAO extends CrudDAO<Attendance,String>{
-    
+       public Attendance search(String id) throws Exception;
 }

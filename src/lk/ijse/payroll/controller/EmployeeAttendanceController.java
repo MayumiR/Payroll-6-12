@@ -21,8 +21,8 @@ public class EmployeeAttendanceController {
     public static AttendanceBO attendanceBO=new AttendanceBOImpl();
     public static EmployeeBO employeeBO=new EmployeeBOImpl();
     
-    public static EmployeeDTO searchEmployee(String employeeID) throws Exception {
-        return employeeBO.searchEmployee(employeeID);
+    public static AttendanceDTO getAttendanceCount(String employeeID) throws Exception {
+        return attendanceBO.getAttendanceCount(employeeID);
     }
 
     public static boolean addAttendance(AttendanceDTO attendance) throws Exception {

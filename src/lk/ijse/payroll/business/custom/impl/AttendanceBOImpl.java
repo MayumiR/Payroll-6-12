@@ -92,6 +92,18 @@ public class AttendanceBOImpl implements AttendanceBO{
         }
         return null;
     }
+
+
+    @Override
+    public AttendanceDTO getAttendanceCount(String id) throws Exception {
+        Attendance attendance=attendanceDAO.search(id);
+        AttendanceDTO attendanceDTO = new AttendanceDTO();
+        attendanceDTO.setLeaveCount(attendance.getLeaveCount());
+        attendanceDTO.setPresentCount(attendance.getPresentCount());
+        return attendanceDTO;
+    }
+
+   
     }
     
     

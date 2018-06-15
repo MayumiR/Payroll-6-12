@@ -438,13 +438,22 @@ public class EmployeeAttendance extends javax.swing.JPanel {
 
     private void RadioButtonPrasentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioButtonPrasentActionPerformed
         dayStatus=1;
-//        if(RadioButtonPrasent==isSelected()){
-//            
-//        }
+        dayType = "FullDay";
+        if(RadioButtonPrasent.isSelected()){
+            RadioButtonLeave.setEnabled(false);
+        }else{
+            RadioButtonLeave.setEnabled(true);
+        }
     }//GEN-LAST:event_RadioButtonPrasentActionPerformed
 
     private void RadioButtonLeaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioButtonLeaveActionPerformed
         dayStatus=0;
+        dayType = "FullDay";
+        if(RadioButtonLeave.isSelected()){
+            RadioButtonPrasent.setEnabled(false);
+        }else{
+            RadioButtonPrasent.setEnabled(false);
+        }
     }//GEN-LAST:event_RadioButtonLeaveActionPerformed
 
     private void jTextFieldAttendanceIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAttendanceIdActionPerformed

@@ -147,6 +147,7 @@ public class AllowanceReport extends javax.swing.JFrame {
     }//GEN-LAST:event_ComboBoxEmpNameActionPerformed
 
     private void BtnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnViewActionPerformed
+
       String empoyeeName=(String) ComboBoxEmpName.getSelectedItem();
            EmployeeDTO employee = null;
        try {

@@ -36,7 +36,7 @@
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="payroll"/>
 		<queryString>
-			<![CDATA[ select e.EmpName,BasicSalary,a.date,a.HRA,a.VA,a.Medical,a.Total from employee e, allowance a where e.id= a. EmployeeId and EmployeeId=$p{EmpId} group by EmployeeId;]]>
+			<![CDATA[ select e.EmpName,BasicSalary,a.date,a.HRA,a.VA,a.Medical,a.Total from employee e, allowance a where e.id= a. EmployeeId and EmployeeId=$P{EmpId} group by EmployeeId;]]>
 		</queryString>
 		<field name="EmpName" class="java.lang.String"/>
 		<field name="BasicSalary" class="java.math.BigDecimal"/>

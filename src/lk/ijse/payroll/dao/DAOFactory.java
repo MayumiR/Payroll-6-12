@@ -1,4 +1,4 @@
-/*
+  /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -13,6 +13,8 @@ import lk.ijse.payroll.dao.custom.impl.AttendanceDAOImpl;
 import lk.ijse.payroll.dao.custom.impl.DedcutionDAOImpl;
 import lk.ijse.payroll.dao.custom.impl.DesignationDAOImpl;
 import lk.ijse.payroll.dao.custom.impl.EmployeeDAOImpl;
+import lk.ijse.payroll.dao.custom.impl.SalaryDAOImpl;
+import lk.ijse.payroll.entity.Salary;
 
 
 /**
@@ -22,7 +24,7 @@ import lk.ijse.payroll.dao.custom.impl.EmployeeDAOImpl;
 public class DAOFactory {
     
     public enum DAOTypes{
-        EMPLOYEE,DESIGNATION,ATTENDANCE, ALLOWANCE,DEDUCTION;
+        EMPLOYEE,DESIGNATION,ATTENDANCE, ALLOWANCE,DEDUCTION,SALARY;
         
     }
 
@@ -50,7 +52,8 @@ public class DAOFactory {
                 return (T) new AllowanceDAOImpl();
             case DEDUCTION:
                 return (T) new DedcutionDAOImpl();
-            
+            case SALARY:
+                return (T) new SalaryDAOImpl();
                 default:
                 return null;
         }

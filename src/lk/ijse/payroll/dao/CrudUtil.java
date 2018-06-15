@@ -11,7 +11,7 @@ import lk.ijse.payroll.dbconnection.DBConnection;
 
 /**
  *
- * @author ranjith-suranga
+ * @author Shashika
  */
 public class CrudUtil {
 

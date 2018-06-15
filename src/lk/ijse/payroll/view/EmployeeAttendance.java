@@ -9,7 +9,9 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
@@ -30,17 +32,20 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
  */
 public class EmployeeAttendance extends javax.swing.JPanel {
     ButtonGroup bg;
-    private String dayStatus="",dayType="",date = "",employeeName;
+    private String dayType="",date = "",employeeName;
+    private int dayStatus;
     private String employeeId="";           
     DefaultTableModel dtm;          
     private EmployeeBO employeeBO;
+    
+    
     /**
      * Creates new form Attendance
      */
     public EmployeeAttendance() {
         initComponents();
-        //setInTime();
         commenMethod();
+        getCurrentDateStamp();
        
     }
     public void commenMethod(){
@@ -48,7 +53,6 @@ public class EmployeeAttendance extends javax.swing.JPanel {
         groupButtonAttendance();
         attendanceId();
         tableView();
-        //setTiime();
         AutoCompleteDecorator.decorate(jComboBoxEmpName);
         employeeBO = new EmployeeBOImpl();
         dtm=(DefaultTableModel) TableAttendance.getModel();
@@ -70,10 +74,9 @@ public class EmployeeAttendance extends javax.swing.JPanel {
         jLabelEmployeeID = new javax.swing.JLabel();
         jLabelEmployeeName = new javax.swing.JLabel();
         jLabelDesignation = new javax.swing.JLabel();
-        DatePickerDate = new org.jdesktop.swingx.JXDatePicker();
         jLabel2 = new javax.swing.JLabel();
         jSeparator16 = new javax.swing.JSeparator();
-        jTextFieldDesignation = new javax.swing.JTextField();
+        TxtDesignation = new javax.swing.JTextField();
         CheckBoxHalf = new javax.swing.JCheckBox();
         RadioButtonPrasent = new javax.swing.JRadioButton();
         RadioButtonLeave = new javax.swing.JRadioButton();
@@ -87,7 +90,6 @@ public class EmployeeAttendance extends javax.swing.JPanel {
         LtTxt = new javax.swing.JTextField();
         jSeparator18 = new javax.swing.JSeparator();
         jSeparator5 = new javax.swing.JSeparator();
-        jSeparator6 = new javax.swing.JSeparator();
         jLabelEmployeeName1 = new javax.swing.JLabel();
         jTextFieldAttendanceId = new javax.swing.JTextField();
         jSeparator19 = new javax.swing.JSeparator();
@@ -95,10 +97,14 @@ public class EmployeeAttendance extends javax.swing.JPanel {
         jSeparator22 = new javax.swing.JSeparator();
         TxtEmployeeId = new javax.swing.JTextField();
         jComboBoxEmpName = new javax.swing.JComboBox<>();
+        ToggleButtonOutTime = new javax.swing.JToggleButton();
+        ToggleButtonInTime = new javax.swing.JToggleButton();
+        DateLbl = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TableAttendance = new org.jdesktop.swingx.JXTable();
         BtnAdd1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1156, 760));
@@ -149,15 +155,6 @@ public class EmployeeAttendance extends javax.swing.JPanel {
         jLabelDesignation.setText("Designation");
         jXPanel1.add(jLabelDesignation, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 110, 30));
 
-        DatePickerDate.setForeground(new java.awt.Color(31, 58, 147));
-        DatePickerDate.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 14)); // NOI18N
-        DatePickerDate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DatePickerDateActionPerformed(evt);
-            }
-        });
-        jXPanel1.add(DatePickerDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 200, 190, 30));
-
         jLabel2.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(31, 58, 147));
         jLabel2.setText("Date");
@@ -168,10 +165,15 @@ public class EmployeeAttendance extends javax.swing.JPanel {
         jSeparator16.setOpaque(true);
         jXPanel1.add(jSeparator16, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, 190, -1));
 
-        jTextFieldDesignation.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
-        jTextFieldDesignation.setForeground(new java.awt.Color(31, 58, 147));
-        jTextFieldDesignation.setBorder(null);
-        jXPanel1.add(jTextFieldDesignation, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 190, 30));
+        TxtDesignation.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
+        TxtDesignation.setForeground(new java.awt.Color(31, 58, 147));
+        TxtDesignation.setBorder(null);
+        TxtDesignation.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TxtDesignationKeyReleased(evt);
+            }
+        });
+        jXPanel1.add(TxtDesignation, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 190, 30));
 
         CheckBoxHalf.setBackground(new java.awt.Color(255, 255, 255));
         CheckBoxHalf.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 14)); // NOI18N
@@ -182,7 +184,7 @@ public class EmployeeAttendance extends javax.swing.JPanel {
                 CheckBoxHalfActionPerformed(evt);
             }
         });
-        jXPanel1.add(CheckBoxHalf, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 80, 110, -1));
+        jXPanel1.add(CheckBoxHalf, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 150, 110, -1));
 
         RadioButtonPrasent.setBackground(new java.awt.Color(255, 255, 255));
         RadioButtonPrasent.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 14)); // NOI18N
@@ -193,7 +195,7 @@ public class EmployeeAttendance extends javax.swing.JPanel {
                 RadioButtonPrasentActionPerformed(evt);
             }
         });
-        jXPanel1.add(RadioButtonPrasent, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 80, 110, 30));
+        jXPanel1.add(RadioButtonPrasent, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 80, 110, 30));
 
         RadioButtonLeave.setBackground(new java.awt.Color(255, 255, 255));
         RadioButtonLeave.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 14)); // NOI18N
@@ -204,54 +206,63 @@ public class EmployeeAttendance extends javax.swing.JPanel {
                 RadioButtonLeaveActionPerformed(evt);
             }
         });
-        jXPanel1.add(RadioButtonLeave, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 140, 110, 30));
+        jXPanel1.add(RadioButtonLeave, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 140, 110, 30));
 
         OutTimeLbl.setBackground(new java.awt.Color(255, 255, 255));
         OutTimeLbl.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
         OutTimeLbl.setForeground(new java.awt.Color(31, 58, 147));
         OutTimeLbl.setOpaque(true);
-        jXPanel1.add(OutTimeLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 10, 100, 30));
-        jXPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 110, 490, 10));
+        jXPanel1.add(OutTimeLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 80, 100, 30));
+        jXPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 120, 490, 10));
 
         jLabelDesignation1.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
         jLabelDesignation1.setForeground(new java.awt.Color(31, 58, 147));
         jLabelDesignation1.setText("Late hours");
-        jXPanel1.add(jLabelDesignation1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 230, 120, 30));
+        jXPanel1.add(jLabelDesignation1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 240, 120, 30));
 
         jLabelDesignation2.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
         jLabelDesignation2.setForeground(new java.awt.Color(31, 58, 147));
         jLabelDesignation2.setText("Over Time hours");
-        jXPanel1.add(jLabelDesignation2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 190, -1, 30));
-        jXPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 180, 490, 10));
+        jXPanel1.add(jLabelDesignation2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 200, -1, 30));
+        jXPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 190, 490, 10));
 
         OthTxt.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
         OthTxt.setForeground(new java.awt.Color(31, 58, 147));
         OthTxt.setBorder(null);
-        jXPanel1.add(OthTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 190, 70, 30));
+        OthTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                OthTxtKeyReleased(evt);
+            }
+        });
+        jXPanel1.add(OthTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 200, 70, 30));
 
         jSeparator17.setBackground(new java.awt.Color(0, 139, 139));
         jSeparator17.setForeground(new java.awt.Color(31, 58, 147));
         jSeparator17.setOpaque(true);
-        jXPanel1.add(jSeparator17, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 220, 70, -1));
+        jXPanel1.add(jSeparator17, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 230, 70, -1));
 
         LtTxt.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
         LtTxt.setForeground(new java.awt.Color(31, 58, 147));
         LtTxt.setBorder(null);
-        jXPanel1.add(LtTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 230, 70, 30));
+        LtTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                LtTxtKeyReleased(evt);
+            }
+        });
+        jXPanel1.add(LtTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 240, 70, 30));
 
         jSeparator18.setBackground(new java.awt.Color(0, 139, 139));
         jSeparator18.setForeground(new java.awt.Color(31, 58, 147));
         jSeparator18.setOpaque(true);
-        jXPanel1.add(jSeparator18, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 260, 70, -1));
+        jXPanel1.add(jSeparator18, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 270, 70, -1));
 
         jSeparator5.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jXPanel1.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, 10, 260));
-        jXPanel1.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 60, 490, 10));
+        jXPanel1.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 10, 10, 260));
 
         jLabelEmployeeName1.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
         jLabelEmployeeName1.setForeground(new java.awt.Color(31, 58, 147));
         jLabelEmployeeName1.setText("Attendance ID");
-        jXPanel1.add(jLabelEmployeeName1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, 150, 30));
+        jXPanel1.add(jLabelEmployeeName1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, 150, 30));
 
         jTextFieldAttendanceId.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
         jTextFieldAttendanceId.setForeground(new java.awt.Color(31, 58, 147));
@@ -261,18 +272,18 @@ public class EmployeeAttendance extends javax.swing.JPanel {
                 jTextFieldAttendanceIdActionPerformed(evt);
             }
         });
-        jXPanel1.add(jTextFieldAttendanceId, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 10, 50, 30));
+        jXPanel1.add(jTextFieldAttendanceId, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 20, 50, 30));
 
         jSeparator19.setBackground(new java.awt.Color(0, 139, 139));
         jSeparator19.setForeground(new java.awt.Color(31, 58, 147));
         jSeparator19.setOpaque(true);
-        jXPanel1.add(jSeparator19, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 40, 50, -1));
+        jXPanel1.add(jSeparator19, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 50, 50, -1));
 
         InTimeLbl.setBackground(new java.awt.Color(255, 255, 255));
         InTimeLbl.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
         InTimeLbl.setForeground(new java.awt.Color(31, 58, 147));
         InTimeLbl.setOpaque(true);
-        jXPanel1.add(InTimeLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 10, 100, 30));
+        jXPanel1.add(InTimeLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 80, 100, 30));
 
         jSeparator22.setBackground(new java.awt.Color(31, 58, 147));
         jSeparator22.setForeground(new java.awt.Color(31, 58, 147));
@@ -287,7 +298,7 @@ public class EmployeeAttendance extends javax.swing.JPanel {
                 TxtEmployeeIdActionPerformed(evt);
             }
         });
-        jXPanel1.add(TxtEmployeeId, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 90, 70, 20));
+        jXPanel1.add(TxtEmployeeId, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 85, 70, -1));
 
         jComboBoxEmpName.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
         jComboBoxEmpName.setForeground(new java.awt.Color(31, 58, 147));
@@ -297,6 +308,31 @@ public class EmployeeAttendance extends javax.swing.JPanel {
             }
         });
         jXPanel1.add(jComboBoxEmpName, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 30, 190, 30));
+
+        ToggleButtonOutTime.setBackground(new java.awt.Color(255, 255, 255));
+        ToggleButtonOutTime.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 11)); // NOI18N
+        ToggleButtonOutTime.setText("Out");
+        ToggleButtonOutTime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ToggleButtonOutTimeActionPerformed(evt);
+            }
+        });
+        jXPanel1.add(ToggleButtonOutTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 80, 50, 30));
+
+        ToggleButtonInTime.setBackground(new java.awt.Color(255, 255, 255));
+        ToggleButtonInTime.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 11)); // NOI18N
+        ToggleButtonInTime.setText("In");
+        ToggleButtonInTime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ToggleButtonInTimeActionPerformed(evt);
+            }
+        });
+        jXPanel1.add(ToggleButtonInTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 80, -1, 30));
+
+        DateLbl.setBackground(new java.awt.Color(255, 255, 255));
+        DateLbl.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 16)); // NOI18N
+        DateLbl.setForeground(new java.awt.Color(31, 58, 147));
+        jXPanel1.add(DateLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 204, 190, 30));
 
         add(jXPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 1060, 280));
 
@@ -331,6 +367,16 @@ public class EmployeeAttendance extends javax.swing.JPanel {
             }
         });
         add(BtnAdd1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 410, 130, 30));
+
+        jLabel1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 11)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Attendance");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 80, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAddActionPerformed
@@ -339,7 +385,7 @@ public class EmployeeAttendance extends javax.swing.JPanel {
                TxtEmployeeId.getText(),
                dayStatus,
                dayType,
-               date,
+               DateLbl.getText(),
                Integer.parseInt(OthTxt.getText()),
                Integer.parseInt(LtTxt.getText()),
                InTimeLbl.getText(),
@@ -350,8 +396,10 @@ public class EmployeeAttendance extends javax.swing.JPanel {
                 if(validation()){
                     if (result){
                         JOptionPane.showMessageDialog(this, "Saved successfully");
-                        clearTextFields();
                         tableView();
+                        clearTextFields();
+                        attendanceId();
+                        
                     }else{
                         JOptionPane.showMessageDialog(this, "Failed to Save");
                     }
@@ -359,7 +407,7 @@ public class EmployeeAttendance extends javax.swing.JPanel {
             } catch (Exception ex) {
                 Logger.getLogger(EmployeeAttendance.class.getName()).log(Level.SEVERE, null, ex);
             }
-     
+ 
     }//GEN-LAST:event_BtnAddActionPerformed
 
     private void BtnAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAdd1ActionPerformed
@@ -367,22 +415,12 @@ public class EmployeeAttendance extends javax.swing.JPanel {
     }//GEN-LAST:event_BtnAdd1ActionPerformed
 
     private void RadioButtonPrasentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioButtonPrasentActionPerformed
-        dayStatus="Present";
+        dayStatus=1;
     }//GEN-LAST:event_RadioButtonPrasentActionPerformed
 
     private void RadioButtonLeaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioButtonLeaveActionPerformed
-        dayStatus="Leave";
+        dayStatus=0;
     }//GEN-LAST:event_RadioButtonLeaveActionPerformed
-
-    private void CheckBoxHalfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckBoxHalfActionPerformed
-        dayType="Half Day";
-    }//GEN-LAST:event_CheckBoxHalfActionPerformed
-
-    private void DatePickerDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DatePickerDateActionPerformed
-        //System.out.println("Date>>"+new java.sql.Date(DatePickerDate.getDate().getTime()));
-        date =    ""+ new java.sql.Date(DatePickerDate.getDate().getTime());
-
-    }//GEN-LAST:event_DatePickerDateActionPerformed
 
     private void jTextFieldAttendanceIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAttendanceIdActionPerformed
         // TODO add your handling code here:
@@ -399,7 +437,7 @@ public class EmployeeAttendance extends javax.swing.JPanel {
             EmployeeDTO employee=EmployeeRegisterController.searchEmployee(empoyeeName);
             if(employee!=null){
                 TxtEmployeeId.setText(employee.getId());
-                jTextFieldDesignation.setText(employee.getDesignation());
+                TxtDesignation.setText(employee.getDesignation());
                
             }
         } catch (Exception ex) {
@@ -407,12 +445,70 @@ public class EmployeeAttendance extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jComboBoxEmpNameActionPerformed
 
+    private void ToggleButtonOutTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ToggleButtonOutTimeActionPerformed
+        if(ToggleButtonOutTime.isSelected()){
+            getOutTime();
+        }else{
+           OutTimeLbl.setText("00:00:00");
+       }
+    }//GEN-LAST:event_ToggleButtonOutTimeActionPerformed
+
+    private void ToggleButtonInTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ToggleButtonInTimeActionPerformed
+        if(ToggleButtonInTime.isSelected()){
+            getInTime();
+        }else{
+            InTimeLbl.setText("00:00:00");
+        }
+        
+    }//GEN-LAST:event_ToggleButtonInTimeActionPerformed
+
+    private void TxtDesignationKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtDesignationKeyReleased
+        String txt = TxtDesignation.getText();
+        int caretPosition = TxtDesignation.getCaretPosition();
+        if (!txt.matches("^[A-Za-z//]*$")) {
+            TxtDesignation.setText(txt.substring(0, caretPosition - 1) + txt.substring(caretPosition));
+            TxtDesignation.setCaretPosition(caretPosition - 1);
+        }
+    }//GEN-LAST:event_TxtDesignationKeyReleased
+
+    private void OthTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_OthTxtKeyReleased
+        String txt = OthTxt.getText();
+        int caretPosition = OthTxt.getCaretPosition();
+        if (!txt.matches("^[\\d]*")) {
+            OthTxt.setText(txt.substring(0, caretPosition - 1) + txt.substring(caretPosition));
+            OthTxt.setCaretPosition(caretPosition - 1);
+        }
+    }//GEN-LAST:event_OthTxtKeyReleased
+
+    private void LtTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_LtTxtKeyReleased
+        String txt = LtTxt.getText();
+        int caretPosition = LtTxt.getCaretPosition();
+        if (!txt.matches("^[\\d]*")) {
+            LtTxt.setText(txt.substring(0, caretPosition - 1) + txt.substring(caretPosition));
+            LtTxt.setCaretPosition(caretPosition - 1);
+        }
+    }//GEN-LAST:event_LtTxtKeyReleased
+
+    private void CheckBoxHalfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckBoxHalfActionPerformed
+        dayType="Half Day";
+    }//GEN-LAST:event_CheckBoxHalfActionPerformed
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+//        Attendance attendance=new Attendance();
+//        AllLoadpnl.removeAll();
+//        attendance.setSize(AllLoadpnl.getSize());
+//        attendance.setVisible(true);
+//        AllLoadpnl.add(attendance);
+//        AllLoadpnl.revalidate();
+//        AllLoadpnl.repaint();
+    }//GEN-LAST:event_jLabel1MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnAdd;
     private javax.swing.JButton BtnAdd1;
     private javax.swing.JCheckBox CheckBoxHalf;
-    private org.jdesktop.swingx.JXDatePicker DatePickerDate;
+    private javax.swing.JLabel DateLbl;
     private javax.swing.JLabel InTimeLbl;
     private javax.swing.JTextField LtTxt;
     private javax.swing.JTextField OthTxt;
@@ -420,8 +516,12 @@ public class EmployeeAttendance extends javax.swing.JPanel {
     private javax.swing.JRadioButton RadioButtonLeave;
     private javax.swing.JRadioButton RadioButtonPrasent;
     private org.jdesktop.swingx.JXTable TableAttendance;
+    private javax.swing.JToggleButton ToggleButtonInTime;
+    private javax.swing.JToggleButton ToggleButtonOutTime;
+    private javax.swing.JTextField TxtDesignation;
     private javax.swing.JTextField TxtEmployeeId;
     private javax.swing.JComboBox<String> jComboBoxEmpName;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelDesignation;
     private javax.swing.JLabel jLabelDesignation1;
@@ -442,9 +542,7 @@ public class EmployeeAttendance extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JSeparator jSeparator6;
     private javax.swing.JTextField jTextFieldAttendanceId;
-    private javax.swing.JTextField jTextFieldDesignation;
     private org.jdesktop.swingx.JXPanel jXPanel1;
     // End of variables declaration//GEN-END:variables
 
@@ -466,7 +564,7 @@ public class EmployeeAttendance extends javax.swing.JPanel {
     
 
     private void groupButtonAttendance() {
-        ButtonGroup bg=new ButtonGroup();
+       bg= new ButtonGroup();
         
         bg.add(RadioButtonPrasent);
         bg.add(RadioButtonLeave);
@@ -483,13 +581,7 @@ public class EmployeeAttendance extends javax.swing.JPanel {
             Logger.getLogger(EmployeeAttendance.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
-
-    private void setInTime() {  
-         
-    }
-
+   
     private void tableView() {
         try {
 
@@ -520,11 +612,12 @@ public class EmployeeAttendance extends javax.swing.JPanel {
     
     public void clearTextFields(){
         TxtEmployeeId.setText("");
-        jTextFieldDesignation.setText("");
-        DatePickerDate.setDate(null);
-        jTextFieldAttendanceId.setText("");
+        TxtDesignation.setText("");
+        CheckBoxHalf.setSelected(false);
+        OthTxt.setText("");
+        LtTxt.setText("");
         bg.clearSelection();
-       // CheckBoxHalf.
+       
     }
     
     public boolean validation(){
@@ -536,20 +629,131 @@ public class EmployeeAttendance extends javax.swing.JPanel {
         return true;
     }
 
-     private void nowTime() {
-//        new Thread(() -> {
-//            while (true) {
-//                Date date = new Date();
-//                String currentdate = new SimpleDateFormat("hh:mm:ss aa").format(date);
-//
-//                InTimeLbl.setText(currentdate);
-//                try {
-//                    Thread.sleep(1000);
-//                } catch (InterruptedException ex) {
-//
-//                }
-//            }
-//        }).start();
+
+
+    private void getInTime() {
+        new Thread() {
+            int timeRun = 0;
+
+            public void run() {
+                while (timeRun == 0) {
+
+                    Calendar calendar = new GregorianCalendar();
+                    int hour = calendar.get(Calendar.HOUR) + 12;
+                    int minutes = calendar.get(Calendar.MINUTE);
+                    int second = calendar.get(Calendar.SECOND);
+                    int ampm = calendar.get(Calendar.AM_PM);
+                   
+
+                    String daynight;
+                    
+                    if (ampm == 1) {
+                        daynight = "PM";
+                    } else {
+                        daynight = "AM";
+                    }
+                    
+                    String timeset = hour + ":" + minutes + ":" + second + ":" + daynight;
+
+                    String Time = timeset;
+                    InTimeLbl.setText(Time);
+                    InTimeLbl.setText(timeset);
+                    
+                    
+                }
+            }
+
+        }.start();
+    }
+
+    private void getOutTime() {
+         new Thread() {
+            int timeRun = 0;
+
+            public void run() {
+                while (timeRun == 0) {
+
+                    Calendar calendar = new GregorianCalendar();
+                    int hour = calendar.get(Calendar.HOUR) + 12;
+                    int minutes = calendar.get(Calendar.MINUTE);
+                    int second = calendar.get(Calendar.SECOND);
+                    int ampm = calendar.get(Calendar.AM_PM);
+                   
+
+                    String daynight;
+                    
+                    if (ampm == 1) {
+                        daynight = "PM";
+                    } else {
+                        daynight = "AM";
+                    }
+                    
+                    String timeset = hour + ":" + minutes + ":" + second + ":" + daynight;
+
+                    String Time = timeset;
+                    
+                    OutTimeLbl.setText(Time);
+                    OutTimeLbl.setText(timeset);
+                    
+                }
+            }
+
+        }.start();
+    }
+
+    private void getCurrentDateStamp() {
+        new Thread() {
+            int timeRun = 0;
+
+            public void run() {
+                while (timeRun == 0) {
+
+                    Calendar calendar = new GregorianCalendar();
+                    int hour = calendar.get(Calendar.HOUR) + 12;
+                    int minutes = calendar.get(Calendar.MINUTE);
+                    int second = calendar.get(Calendar.SECOND);
+                    int year = calendar.get(Calendar.YEAR);
+                    int month = calendar.get(Calendar.MONTH) + 1;
+                    int day = calendar.get(Calendar.DATE);
+                    int ampm = calendar.get(Calendar.AM_PM);
+                    int day_of_week = calendar.get(Calendar.DAY_OF_WEEK);
+                    int name_of_day = calendar.get(Calendar.DAY_OF_WEEK);
+
+                    String daynight;
+                    String day_name;
+
+                    if (ampm == 1) {
+                        daynight = "PM";
+                    } else {
+                        daynight = "AM";
+                    }
+                    if (name_of_day == 1) {
+                        day_name = "Sunday";
+
+                    } else if (name_of_day == 2) {
+                        day_name = "Monday";
+                    } else if (name_of_day == 3) {
+                        day_name = "Tuesday";
+                    } else if (name_of_day == 4) {
+                        day_name = "Wednesdsy";
+                    } else if (name_of_day == 5) {
+                        day_name = "Thursday";
+                    } else if (name_of_day == 6) {
+                        day_name = "Friday";
+                    } else {
+                        day_name = "Saturday";
+                    }
+                    String dateset = year + "/" + month + "/" + day + " " + day_name + "";
+                    String timeset = hour + ":" + minutes + ":" + second + ":" + daynight;
+
+                    String dateAndTime =  dateset;
+                    DateLbl.setText(dateAndTime);
+                    DateLbl.setText(dateset);
+                }
+            }
+
+        }.start();
+
     }
     
 }

@@ -12,7 +12,7 @@ package lk.ijse.payroll.entity;
 public class Attendance {
     private String attendanceId;
     private String employeeId;
-    private String dayStatus;//leave - 0 , precent - 1 
+    private int dayStatus;//leave - 0 , precent - 1 
     private String dayType;
     private String date;
     private int OThrs,lateHrs;
@@ -22,7 +22,7 @@ public class Attendance {
     public Attendance() {
     }
 
-    public Attendance(String attendanceId, String employeeId, String dayStatus, String dayType, String date, int OThrs, int lateHrs, String inTime, String outTime) {
+    public Attendance(String attendanceId, String employeeId, int dayStatus, String dayType, String date, int OThrs, int lateHrs, String inTime, String outTime) {
         this.attendanceId = attendanceId;
         this.employeeId = employeeId;
         this.dayStatus = dayStatus;
@@ -65,14 +65,14 @@ public class Attendance {
     /**
      * @return the dayStatus
      */
-    public String getDayStatus() {
+    public int getDayStatus() {
         return dayStatus;
     }
 
     /**
      * @param dayStatus the dayStatus to set
      */
-    public void setDayStatus(String dayStatus) {
+    public void setDayStatus(int dayStatus) {
         this.dayStatus = dayStatus;
     }
 
@@ -159,6 +159,7 @@ public class Attendance {
     public void setOutTime(String outTime) {
         this.outTime = outTime;
     }
+
     
 
 }

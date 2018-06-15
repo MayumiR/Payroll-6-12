@@ -48,7 +48,6 @@ public class Home extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(31, 58, 147));
         jPanel1.setPreferredSize(new java.awt.Dimension(210, 768));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabelSalary.setBackground(new java.awt.Color(31, 58, 147));
         jLabelSalary.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 20)); // NOI18N
@@ -67,7 +66,6 @@ public class Home extends javax.swing.JFrame {
                 jLabelSalaryMouseClicked(evt);
             }
         });
-        jPanel1.add(jLabelSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 600, 190, 50));
 
         jLabelHome.setBackground(new java.awt.Color(31, 58, 147));
         jLabelHome.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 20)); // NOI18N
@@ -85,7 +83,6 @@ public class Home extends javax.swing.JFrame {
                 jLabelHomeMouseExited(evt);
             }
         });
-        jPanel1.add(jLabelHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 190, -1));
 
         jLabelEmployee.setBackground(new java.awt.Color(31, 58, 147));
         jLabelEmployee.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 20)); // NOI18N
@@ -105,7 +102,6 @@ public class Home extends javax.swing.JFrame {
                 jLabelEmployeeMouseExited(evt);
             }
         });
-        jPanel1.add(jLabelEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 190, -1));
 
         jLabelAttendance.setBackground(new java.awt.Color(31, 58, 147));
         jLabelAttendance.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 20)); // NOI18N
@@ -124,7 +120,6 @@ public class Home extends javax.swing.JFrame {
                 jLabelAttendanceMouseExited(evt);
             }
         });
-        jPanel1.add(jLabelAttendance, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 190, 50));
 
         jLabelAllowance.setBackground(new java.awt.Color(31, 58, 147));
         jLabelAllowance.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 20)); // NOI18N
@@ -144,7 +139,6 @@ public class Home extends javax.swing.JFrame {
                 jLabelAllowanceMouseExited(evt);
             }
         });
-        jPanel1.add(jLabelAllowance, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 190, -1));
 
         jLabelDeduction.setBackground(new java.awt.Color(31, 58, 147));
         jLabelDeduction.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 20)); // NOI18N
@@ -164,7 +158,6 @@ public class Home extends javax.swing.JFrame {
                 jLabelDeductionMouseExited(evt);
             }
         });
-        jPanel1.add(jLabelDeduction, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, 190, 50));
 
         LblReport.setBackground(new java.awt.Color(31, 58, 147));
         LblReport.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 20)); // NOI18N
@@ -183,7 +176,6 @@ public class Home extends javax.swing.JFrame {
                 LblReportMouseExited(evt);
             }
         });
-        jPanel1.add(LblReport, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 680, 190, 50));
 
         lblLoan.setBackground(new java.awt.Color(31, 58, 147));
         lblLoan.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 20)); // NOI18N
@@ -203,7 +195,43 @@ public class Home extends javax.swing.JFrame {
                 lblLoanMouseClicked(evt);
             }
         });
-        jPanel1.add(lblLoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 520, 190, 50));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelHome, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelAttendance, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelAllowance, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelDeduction, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblLoan, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LblReport, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(120, 120, 120)
+                .addComponent(jLabelHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(jLabelEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(jLabelAttendance, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(jLabelAllowance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(jLabelDeduction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(lblLoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(jLabelSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(LblReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 790));
 

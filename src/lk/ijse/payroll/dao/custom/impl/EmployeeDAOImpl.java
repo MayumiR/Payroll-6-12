@@ -31,7 +31,7 @@ public  class EmployeeDAOImpl implements EmployeeDAO{
                 employee.getDob(),
                 employee.getGender(),
                 employee.getLateHoursRate(),
-                employee.getOverTimeHoursRate() ) > 0;
+                employee.getOverTimeHoursRate() ) >= 0;
     }
 
     @Override
@@ -54,7 +54,7 @@ public  class EmployeeDAOImpl implements EmployeeDAO{
 
     @Override
     public Employee search(String name) throws Exception {
-        System.out.println("))))))))11111");
+        //System.out.println("))))))))11111");
         ResultSet rst = CrudUtil.executeQuery("Select * From Employee where EmpName=? ", name);
         if (rst.next()) {
             return new Employee(
@@ -102,7 +102,7 @@ public  class EmployeeDAOImpl implements EmployeeDAO{
     public Employee searchEmployeeID(String id) throws Exception {
         ResultSet rst = CrudUtil.executeQuery("Select * From Employee where Id=?",id );
         if (rst.next()) {
-            System.out.println("))))))))((()");
+            //System.out.println("))))))))((()");
             return new Employee(
                     rst.getString(1), 
                     rst.getString(2),
@@ -119,7 +119,7 @@ public  class EmployeeDAOImpl implements EmployeeDAO{
             );
             
         } else {
-            System.out.println("))))))))(((0");
+            
             return null;
         }    
     }

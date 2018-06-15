@@ -40,7 +40,6 @@ public class Reports extends javax.swing.JPanel {
 
         attendance = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        endDateChooser = new org.freixas.jcalendar.JCalendar();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1156, 760));
@@ -52,7 +51,7 @@ public class Reports extends javax.swing.JPanel {
                 attendanceActionPerformed(evt);
             }
         });
-        add(attendance, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 140, 80));
+        add(attendance, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 140, 30));
 
         jButton2.setText("Attendance");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -60,12 +59,11 @@ public class Reports extends javax.swing.JPanel {
                 jButton2ActionPerformed(evt);
             }
         });
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 140, 80));
-        add(endDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(411, 60, 300, 160));
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 140, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void attendanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attendanceActionPerformed
-       InputStream input=getClass().getResourceAsStream("/lk/ijse/payroll/report/employeeDetails.jasper");
+       InputStream input=getClass().getResourceAsStream("/lk/ijse/payroll/report/employeeDetails_1.jasper");
        HashMap map=new HashMap();
        try {
             JasperPrint jasperPrint=JasperFillManager.fillReport(input, map,DBConnection.getInstance().getConnection());
@@ -80,14 +78,14 @@ public class Reports extends javax.swing.JPanel {
     }//GEN-LAST:event_attendanceActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       InputStream input=getClass().getResourceAsStream("/lk/ijse/payroll/report/employeeAttendanceDetails.jasper");
+       InputStream input=getClass().getResourceAsStream("/lk/ijse/payroll/report/employeeAttendance.jasper");
        HashMap map=new HashMap();
        try {
             JasperPrint jasperPrint=JasperFillManager.fillReport(input, map,DBConnection.getInstance().getConnection());
             JasperViewer.viewReport(jasperPrint);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(EmployeeSalary.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (SQLException ex) { 
             Logger.getLogger(EmployeeSalary.class.getName()).log(Level.SEVERE, null, ex);
         } catch (JRException ex) {
             Logger.getLogger(EmployeeSalary.class.getName()).log(Level.SEVERE, null, ex);
@@ -97,7 +95,6 @@ public class Reports extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton attendance;
-    private org.freixas.jcalendar.JCalendar endDateChooser;
     private javax.swing.JButton jButton2;
     // End of variables declaration//GEN-END:variables
 }

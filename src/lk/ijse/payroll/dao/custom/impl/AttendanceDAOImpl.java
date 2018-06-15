@@ -56,7 +56,7 @@ public  class AttendanceDAOImpl implements AttendanceDAO{
             allAttendance.add(new Attendance(
                     rst.getString(1),
                     rst.getString(2),
-                    rst.getString(3),
+                    rst.getInt(3),
                     rst.getString(4),
                     rst.getString(5),
                     rst.getInt(6),
@@ -79,7 +79,7 @@ public  class AttendanceDAOImpl implements AttendanceDAO{
             allAttendance.add(new Attendance(
                     rst.getString(1),
                     rst.getString(2),
-                    rst.getString(3),
+                    rst.getInt(3),
                     rst.getString(4),
                     rst.getString(5),
                     rst.getInt(6),

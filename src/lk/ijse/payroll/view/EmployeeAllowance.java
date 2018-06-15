@@ -45,11 +45,6 @@ public class EmployeeAllowance extends javax.swing.JPanel {
      */
     public EmployeeAllowance() {
         initComponents();
-        groupButton();
-        genarateAllowanceId();
-        loadEmployeeNames();
-        tableView();
-        AutoCompleteDecorator.decorate(jComboBoxEmpName);
         commenMethod();
        
        
@@ -57,6 +52,14 @@ public class EmployeeAllowance extends javax.swing.JPanel {
     public void commenMethod(){
         employeeBO = new EmployeeBOImpl();
         dtm=(DefaultTableModel) TableAllowance.getModel();
+        groupButton();
+        genarateAllowanceId();
+        loadEmployeeNames();
+        tableView();
+        AutoCompleteDecorator.decorate(jComboBoxEmpName);
+        hideTxtField(); 
+        
+        
     }
 
     /**
@@ -204,6 +207,11 @@ public class EmployeeAllowance extends javax.swing.JPanel {
                 TxtHRAActionPerformed(evt);
             }
         });
+        TxtHRA.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TxtHRAKeyReleased(evt);
+            }
+        });
         add(TxtHRA, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 380, 130, 30));
 
         jSeparator7.setBackground(new java.awt.Color(31, 58, 147));
@@ -217,6 +225,11 @@ public class EmployeeAllowance extends javax.swing.JPanel {
         TxtVA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TxtVAActionPerformed(evt);
+            }
+        });
+        TxtVA.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TxtVAKeyReleased(evt);
             }
         });
         add(TxtVA, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 430, 130, 30));
@@ -234,6 +247,11 @@ public class EmployeeAllowance extends javax.swing.JPanel {
                 TxtMedicalActionPerformed(evt);
             }
         });
+        TxtMedical.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TxtMedicalKeyReleased(evt);
+            }
+        });
         add(TxtMedical, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 480, 130, 30));
 
         jSeparator11.setBackground(new java.awt.Color(31, 58, 147));
@@ -247,6 +265,11 @@ public class EmployeeAllowance extends javax.swing.JPanel {
         TextFieldTotalIncentives.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TextFieldTotalIncentivesActionPerformed(evt);
+            }
+        });
+        TextFieldTotalIncentives.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TextFieldTotalIncentivesKeyReleased(evt);
             }
         });
         add(TextFieldTotalIncentives, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 550, 130, 30));
@@ -290,6 +313,11 @@ public class EmployeeAllowance extends javax.swing.JPanel {
                 TxtHRA_percentageActionPerformed(evt);
             }
         });
+        TxtHRA_percentage.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TxtHRA_percentageKeyReleased(evt);
+            }
+        });
         add(TxtHRA_percentage, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 380, 50, 30));
 
         SeparatorHRA.setBackground(new java.awt.Color(31, 58, 147));
@@ -310,6 +338,11 @@ public class EmployeeAllowance extends javax.swing.JPanel {
                 TxtVA_PercentageActionPerformed(evt);
             }
         });
+        TxtVA_Percentage.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TxtVA_PercentageKeyReleased(evt);
+            }
+        });
         add(TxtVA_Percentage, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 430, 50, 30));
 
         SeparatorMedical.setBackground(new java.awt.Color(31, 58, 147));
@@ -323,6 +356,11 @@ public class EmployeeAllowance extends javax.swing.JPanel {
         TxtMedical_percentage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TxtMedical_percentageActionPerformed(evt);
+            }
+        });
+        TxtMedical_percentage.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TxtMedical_percentageKeyReleased(evt);
             }
         });
         add(TxtMedical_percentage, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 480, 50, 30));
@@ -343,6 +381,11 @@ public class EmployeeAllowance extends javax.swing.JPanel {
         TxtSalary.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TxtSalaryActionPerformed(evt);
+            }
+        });
+        TxtSalary.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TxtSalaryKeyReleased(evt);
             }
         });
         add(TxtSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 170, 150, 30));
@@ -397,6 +440,11 @@ public class EmployeeAllowance extends javax.swing.JPanel {
         TxtDesignation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TxtDesignationActionPerformed(evt);
+            }
+        });
+        TxtDesignation.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TxtDesignationKeyReleased(evt);
             }
         });
         add(TxtDesignation, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 180, 30));
@@ -474,6 +522,7 @@ public class EmployeeAllowance extends javax.swing.JPanel {
         double medical = (salary + amount);
         totalAllowance = totalAllowance + medical;
         TxtMedical.setText(""+medical);
+        
         TextFieldTotalIncentives.setText(""+totalAllowance);
         
         
@@ -486,9 +535,9 @@ public class EmployeeAllowance extends javax.swing.JPanel {
 
     private void jRadioButtonPercentageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPercentageActionPerformed
         if(jRadioButtonPercentage.isSelected()){
-        TxtHRA_percentage.setEnabled(true);
-        TxtVA_Percentage.setEnabled(true);
-        TxtMedical_percentage.setEnabled(true);
+       // TxtHRA_percentage.setEnabled(true);
+        //TxtVA_Percentage.setEnabled(true);
+       // TxtMedical_percentage.setEnabled(true);
         TxtHRA_percentage.setVisible(true);
         TxtVA_Percentage.setVisible(true);
         TxtMedical_percentage.setVisible(true);
@@ -496,6 +545,7 @@ public class EmployeeAllowance extends javax.swing.JPanel {
         SeparatorVA.setVisible(true);
         SeparatorMedical.setVisible(true);
         }
+        TxtHRA_percentage.requestFocus();
     }//GEN-LAST:event_jRadioButtonPercentageActionPerformed
 
     private void TxtHRA_percentageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtHRA_percentageActionPerformed
@@ -563,7 +613,8 @@ public class EmployeeAllowance extends javax.swing.JPanel {
         SeparatorHRA.setVisible(false);
         SeparatorVA.setVisible(false);
         SeparatorMedical.setVisible(false);
-    }
+       }
+        TxtHRA.requestFocus();
     }//GEN-LAST:event_jRadioButtonAmountActionPerformed
 
     private void BtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSaveActionPerformed
@@ -615,16 +666,92 @@ public class EmployeeAllowance extends javax.swing.JPanel {
                 TxtEmployeeId.setText(employee.getId());
                 TxtDesignation.setText(employee.getDesignation());
                 TxtSalary.setText(""+employee.getSalary());
-                
-                
-                
-                
-              
             }
         } catch (Exception ex) {
             Logger.getLogger(EmployeeAllowance.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jComboBoxEmpNameActionPerformed
+
+    private void TxtDesignationKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtDesignationKeyReleased
+        String txt = TxtDesignation.getText();
+        int caretPosition = TxtDesignation.getCaretPosition();
+        if (!txt.matches("^[A-Za-z//]*$")) {
+            TxtDesignation.setText(txt.substring(0, caretPosition - 1) + txt.substring(caretPosition));
+            TxtDesignation.setCaretPosition(caretPosition - 1);
+        }
+    }//GEN-LAST:event_TxtDesignationKeyReleased
+
+    private void TxtSalaryKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtSalaryKeyReleased
+        String txt = TxtSalary.getText();
+        int caretPosition = TxtSalary.getCaretPosition();
+        if (!txt.matches("^[\\d]*")) {
+            TxtSalary.setText(txt.substring(0, caretPosition - 1) + txt.substring(caretPosition));
+            TxtSalary.setCaretPosition(caretPosition - 1);
+        }
+    }//GEN-LAST:event_TxtSalaryKeyReleased
+
+    private void TxtHRA_percentageKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtHRA_percentageKeyReleased
+        String txt = TxtHRA_percentage.getText();
+        int caretPosition = TxtHRA_percentage.getCaretPosition();
+        if (!txt.matches("^[\\d]*")) {
+            TxtHRA_percentage.setText(txt.substring(0, caretPosition - 1) + txt.substring(caretPosition));
+            TxtHRA_percentage.setCaretPosition(caretPosition - 1);
+        }
+    }//GEN-LAST:event_TxtHRA_percentageKeyReleased
+
+    private void TxtVA_PercentageKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtVA_PercentageKeyReleased
+        String txt = TxtVA_Percentage.getText();
+        int caretPosition = TxtVA_Percentage.getCaretPosition();
+        if (!txt.matches("^[\\d]*")) {
+            TxtVA_Percentage.setText(txt.substring(0, caretPosition - 1) + txt.substring(caretPosition));
+            TxtVA_Percentage.setCaretPosition(caretPosition - 1);
+        }
+    }//GEN-LAST:event_TxtVA_PercentageKeyReleased
+
+    private void TxtMedical_percentageKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtMedical_percentageKeyReleased
+        String txt = TxtMedical_percentage.getText();
+        int caretPosition = TxtMedical_percentage.getCaretPosition();
+        if (!txt.matches("^[\\d]*")) {
+            TxtMedical_percentage.setText(txt.substring(0, caretPosition - 1) + txt.substring(caretPosition));
+            TxtMedical_percentage.setCaretPosition(caretPosition - 1);
+        }
+    }//GEN-LAST:event_TxtMedical_percentageKeyReleased
+
+    private void TxtHRAKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtHRAKeyReleased
+        String txt = TxtHRA.getText();
+        int caretPosition = TxtHRA.getCaretPosition();
+        if (!txt.matches("^[\\d]*")) {
+            TxtHRA.setText(txt.substring(0, caretPosition - 1) + txt.substring(caretPosition));
+            TxtHRA.setCaretPosition(caretPosition - 1);
+        }
+    }//GEN-LAST:event_TxtHRAKeyReleased
+
+    private void TxtVAKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtVAKeyReleased
+        String txt = TxtVA.getText();
+        int caretPosition = TxtVA.getCaretPosition();
+        if (!txt.matches("^[\\d]*")) {
+            TxtVA.setText(txt.substring(0, caretPosition - 1) + txt.substring(caretPosition));
+            TxtVA.setCaretPosition(caretPosition - 1);
+        }
+    }//GEN-LAST:event_TxtVAKeyReleased
+
+    private void TxtMedicalKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtMedicalKeyReleased
+        String txt = TxtMedical.getText();
+        int caretPosition = TxtMedical.getCaretPosition();
+        if (!txt.matches("^[\\d]*")) {
+            TxtMedical.setText(txt.substring(0, caretPosition - 1) + txt.substring(caretPosition));
+            TxtMedical.setCaretPosition(caretPosition - 1);
+        }
+    }//GEN-LAST:event_TxtMedicalKeyReleased
+
+    private void TextFieldTotalIncentivesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextFieldTotalIncentivesKeyReleased
+        String txt = TextFieldTotalIncentives.getText();
+        int caretPosition = TextFieldTotalIncentives.getCaretPosition();
+        if (!txt.matches("^[\\d]*")) {
+            TextFieldTotalIncentives.setText(txt.substring(0, caretPosition - 1) + txt.substring(caretPosition));
+            TextFieldTotalIncentives.setCaretPosition(caretPosition - 1);
+        }
+    }//GEN-LAST:event_TextFieldTotalIncentivesKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -679,7 +806,7 @@ public class EmployeeAllowance extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void groupButton() {
-        ButtonGroup bg=new ButtonGroup();
+        bg=new ButtonGroup();
         
         bg.add(jRadioButtonPercentage);
         bg.add(jRadioButtonAmount);
@@ -725,7 +852,6 @@ public class EmployeeAllowance extends javax.swing.JPanel {
         DatePickerAllowanceDate.setDate(null);
         TxtDesignation.setText("");
         TxtSalary.setText("");
-        TxtAllowanceId.setText("");
         TxtHRA_percentage.setText("");
         TxtHRA.setText("");
         TxtVA_Percentage.setText("");
@@ -733,7 +859,7 @@ public class EmployeeAllowance extends javax.swing.JPanel {
         TxtMedical_percentage.setText("");
         TxtMedical.setText("");
         TextFieldTotalIncentives.setText("");
-        //bg.clearSelection();
+        bg.clearSelection();
         
 
     }
@@ -782,6 +908,15 @@ public class EmployeeAllowance extends javax.swing.JPanel {
         System.out.println(""+rate+","+hours);
         double desuctionAmt = rate * hours;
         return desuctionAmt;
+    }
+
+    private void hideTxtField() {
+        TxtHRA_percentage.setVisible(false);
+        SeparatorHRA.setVisible(false);
+        TxtVA_Percentage.setVisible(false);
+        TxtMedical_percentage.setVisible(false);
+        SeparatorVA.setVisible(false);
+        SeparatorMedical.setVisible(false);
     }
 }
 

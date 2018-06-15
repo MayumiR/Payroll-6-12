@@ -6,6 +6,7 @@
 
 package lk.ijse.payroll.view;
 
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -35,6 +36,7 @@ public class EmployeeRegister extends javax.swing.JPanel {
     DesignationDTO selectedDesignation = null;
     ArrayList<DesignationDTO> designations = null;
     ButtonGroup bg;
+    ButtonGroup btng;
     DefaultTableModel dtm;
   
 
@@ -55,11 +57,11 @@ public class EmployeeRegister extends javax.swing.JPanel {
                     clearTextFields();
                     return;
                 }
-                jTextFieldEmployeeId.setText((String) jTableEmployee.getValueAt(jTableEmployee.getSelectedRow(), 0));
-                jTextFieldEmployeeId.setEnabled(false);
-                jTextFieldEmployeeName.setText((String) jTableEmployee.getValueAt(jTableEmployee.getSelectedRow(), 1));
-                jComboBoxDesignation.setSelectedItem((String) jTableEmployee.getValueAt(jTableEmployee.getSelectedRow(), 2)); 
-                jTextFieldSalary.setText(jTableEmployee.getValueAt(jTableEmployee.getSelectedRow(), 3).toString());
+                TxtEmployeeId.setText((String) jTableEmployee.getValueAt(jTableEmployee.getSelectedRow(), 0));
+                TxtEmployeeId.setEnabled(false);
+                TxtEmpName.setText((String) jTableEmployee.getValueAt(jTableEmployee.getSelectedRow(), 1));
+                ComboBoxDesignation.setSelectedItem((String) jTableEmployee.getValueAt(jTableEmployee.getSelectedRow(), 2)); 
+                TxtSalary.setText(jTableEmployee.getValueAt(jTableEmployee.getSelectedRow(), 3).toString());
                 
                 if(jTableEmployee.getValueAt(jTableEmployee.getSelectedRow(), 4).equals("Married")){
                     jRadioButtonMarried.setSelected(true);
@@ -68,8 +70,8 @@ public class EmployeeRegister extends javax.swing.JPanel {
                     jRadioButtonSingle.setSelected(true);
                     jRadioButtonSingle.setEnabled(false);
                 }
-                jTextFieldAddress.setText((String) jTableEmployee.getValueAt(jTableEmployee.getSelectedRow(), 5));
-                jTextFieldContactNum.setText((String) jTableEmployee.getValueAt(jTableEmployee.getSelectedRow(), 6));
+                TxtAddress.setText((String) jTableEmployee.getValueAt(jTableEmployee.getSelectedRow(), 5));
+                TxtContactNum.setText((String) jTableEmployee.getValueAt(jTableEmployee.getSelectedRow(), 6));
                 
                /* DateTimeFormatter formatter=DateTimeFormatter.ofPattern("dd-mm-yyyy");
                 LocalDate localDate=LocalDate.parse(EmployeeDTO.getJo);
@@ -116,23 +118,23 @@ public class EmployeeRegister extends javax.swing.JPanel {
         BtnClear = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jSeparator14 = new javax.swing.JSeparator();
-        jComboBoxDesignation = new javax.swing.JComboBox<>();
+        ComboBoxDesignation = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
         jSeparator15 = new javax.swing.JSeparator();
-        jTextFieldContactNum = new javax.swing.JTextField();
+        TxtContactNum = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jSeparator19 = new javax.swing.JSeparator();
-        jTextFieldAddress = new javax.swing.JTextField();
+        TxtAddress = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jSeparator17 = new javax.swing.JSeparator();
         jLabelEmployeeID = new javax.swing.JLabel();
         jRadioButtonFemale = new javax.swing.JRadioButton();
-        jTextFieldEmployeeId = new javax.swing.JTextField();
+        TxtEmployeeId = new javax.swing.JTextField();
         jRadioButtonMale = new javax.swing.JRadioButton();
-        jTextFieldEmployeeName = new javax.swing.JTextField();
+        TxtEmpName = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jRadioButtonMarried = new javax.swing.JRadioButton();
-        jTextFieldSalary = new javax.swing.JTextField();
+        TxtSalary = new javax.swing.JTextField();
         jSeparator16 = new javax.swing.JSeparator();
         jLabelEmployeeName = new javax.swing.JLabel();
         jLabelDesignation = new javax.swing.JLabel();
@@ -141,8 +143,7 @@ public class EmployeeRegister extends javax.swing.JPanel {
         jLabel14 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         DatePickerJoinDate = new org.jdesktop.swingx.JXDatePicker();
-        TextFieldDateOfBirth = new javax.swing.JTextField();
-        jSeparator20 = new javax.swing.JSeparator();
+        TextFieldDateOfBirth = new com.toedter.calendar.JDateChooser();
         jPanel7 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
@@ -220,14 +221,14 @@ public class EmployeeRegister extends javax.swing.JPanel {
         jSeparator14.setOpaque(true);
         jPanel6.add(jSeparator14, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 190, -1));
 
-        jComboBoxDesignation.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 16)); // NOI18N
-        jComboBoxDesignation.setForeground(new java.awt.Color(31, 58, 147));
-        jComboBoxDesignation.addActionListener(new java.awt.event.ActionListener() {
+        ComboBoxDesignation.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 16)); // NOI18N
+        ComboBoxDesignation.setForeground(new java.awt.Color(31, 58, 147));
+        ComboBoxDesignation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxDesignationActionPerformed(evt);
+                ComboBoxDesignationActionPerformed(evt);
             }
         });
-        jPanel6.add(jComboBoxDesignation, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 190, -1));
+        jPanel6.add(ComboBoxDesignation, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 190, -1));
 
         jLabel13.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(31, 58, 147));
@@ -239,15 +240,23 @@ public class EmployeeRegister extends javax.swing.JPanel {
         jSeparator15.setOpaque(true);
         jPanel6.add(jSeparator15, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 190, -1));
 
-        jTextFieldContactNum.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 16)); // NOI18N
-        jTextFieldContactNum.setForeground(new java.awt.Color(31, 58, 147));
-        jTextFieldContactNum.setBorder(null);
-        jTextFieldContactNum.addActionListener(new java.awt.event.ActionListener() {
+        TxtContactNum.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 16)); // NOI18N
+        TxtContactNum.setForeground(new java.awt.Color(31, 58, 147));
+        TxtContactNum.setBorder(null);
+        TxtContactNum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldContactNumActionPerformed(evt);
+                TxtContactNumActionPerformed(evt);
             }
         });
-        jPanel6.add(jTextFieldContactNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 100, 190, 30));
+        TxtContactNum.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TxtContactNumKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TxtContactNumKeyReleased(evt);
+            }
+        });
+        jPanel6.add(TxtContactNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 100, 190, 30));
 
         jLabel3.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(31, 58, 147));
@@ -259,15 +268,20 @@ public class EmployeeRegister extends javax.swing.JPanel {
         jSeparator19.setOpaque(true);
         jPanel6.add(jSeparator19, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 130, 190, -1));
 
-        jTextFieldAddress.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 16)); // NOI18N
-        jTextFieldAddress.setForeground(new java.awt.Color(31, 58, 147));
-        jTextFieldAddress.setBorder(null);
-        jTextFieldAddress.addActionListener(new java.awt.event.ActionListener() {
+        TxtAddress.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 16)); // NOI18N
+        TxtAddress.setForeground(new java.awt.Color(31, 58, 147));
+        TxtAddress.setBorder(null);
+        TxtAddress.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldAddressActionPerformed(evt);
+                TxtAddressActionPerformed(evt);
             }
         });
-        jPanel6.add(jTextFieldAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 50, 190, 30));
+        TxtAddress.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TxtAddressKeyReleased(evt);
+            }
+        });
+        jPanel6.add(TxtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 50, 190, 30));
 
         jLabel11.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(31, 58, 147));
@@ -296,15 +310,15 @@ public class EmployeeRegister extends javax.swing.JPanel {
         });
         jPanel6.add(jRadioButtonFemale, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 250, 90, -1));
 
-        jTextFieldEmployeeId.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 16)); // NOI18N
-        jTextFieldEmployeeId.setForeground(new java.awt.Color(31, 58, 147));
-        jTextFieldEmployeeId.setBorder(null);
-        jTextFieldEmployeeId.addActionListener(new java.awt.event.ActionListener() {
+        TxtEmployeeId.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 16)); // NOI18N
+        TxtEmployeeId.setForeground(new java.awt.Color(31, 58, 147));
+        TxtEmployeeId.setBorder(null);
+        TxtEmployeeId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldEmployeeIdActionPerformed(evt);
+                TxtEmployeeIdActionPerformed(evt);
             }
         });
-        jPanel6.add(jTextFieldEmployeeId, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 190, 30));
+        jPanel6.add(TxtEmployeeId, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 190, 30));
 
         jRadioButtonMale.setBackground(new java.awt.Color(255, 255, 255));
         jRadioButtonMale.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
@@ -318,15 +332,20 @@ public class EmployeeRegister extends javax.swing.JPanel {
         });
         jPanel6.add(jRadioButtonMale, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 250, 70, -1));
 
-        jTextFieldEmployeeName.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 16)); // NOI18N
-        jTextFieldEmployeeName.setForeground(new java.awt.Color(31, 58, 147));
-        jTextFieldEmployeeName.setBorder(null);
-        jTextFieldEmployeeName.addActionListener(new java.awt.event.ActionListener() {
+        TxtEmpName.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 16)); // NOI18N
+        TxtEmpName.setForeground(new java.awt.Color(31, 58, 147));
+        TxtEmpName.setBorder(null);
+        TxtEmpName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldEmployeeNameActionPerformed(evt);
+                TxtEmpNameActionPerformed(evt);
             }
         });
-        jPanel6.add(jTextFieldEmployeeName, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 190, 30));
+        TxtEmpName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TxtEmpNameKeyReleased(evt);
+            }
+        });
+        jPanel6.add(TxtEmpName, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 190, 30));
 
         jLabel8.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(31, 58, 147));
@@ -345,19 +364,24 @@ public class EmployeeRegister extends javax.swing.JPanel {
         });
         jPanel6.add(jRadioButtonMarried, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 250, 100, -1));
 
-        jTextFieldSalary.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 16)); // NOI18N
-        jTextFieldSalary.setForeground(new java.awt.Color(31, 58, 147));
-        jTextFieldSalary.setBorder(null);
-        jTextFieldSalary.addAncestorListener(new javax.swing.event.AncestorListener() {
+        TxtSalary.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 16)); // NOI18N
+        TxtSalary.setForeground(new java.awt.Color(31, 58, 147));
+        TxtSalary.setBorder(null);
+        TxtSalary.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                jTextFieldSalaryAncestorAdded(evt);
+                TxtSalaryAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
-        jPanel6.add(jTextFieldSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 190, 30));
+        TxtSalary.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TxtSalaryKeyReleased(evt);
+            }
+        });
+        jPanel6.add(TxtSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 190, 30));
 
         jSeparator16.setBackground(new java.awt.Color(31, 58, 147));
         jSeparator16.setForeground(new java.awt.Color(31, 58, 147));
@@ -408,21 +432,7 @@ public class EmployeeRegister extends javax.swing.JPanel {
             }
         });
         jPanel6.add(DatePickerJoinDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 152, 190, 30));
-
-        TextFieldDateOfBirth.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 16)); // NOI18N
-        TextFieldDateOfBirth.setForeground(new java.awt.Color(31, 58, 147));
-        TextFieldDateOfBirth.setBorder(null);
-        TextFieldDateOfBirth.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TextFieldDateOfBirthActionPerformed(evt);
-            }
-        });
         jPanel6.add(TextFieldDateOfBirth, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 200, 190, 30));
-
-        jSeparator20.setBackground(new java.awt.Color(31, 58, 147));
-        jSeparator20.setForeground(new java.awt.Color(31, 58, 147));
-        jSeparator20.setOpaque(true);
-        jPanel6.add(jSeparator20, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 230, 190, -1));
 
         add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 810, 310));
 
@@ -453,6 +463,11 @@ public class EmployeeRegister extends javax.swing.JPanel {
                 LhrTxtActionPerformed(evt);
             }
         });
+        LhrTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                LhrTxtKeyReleased(evt);
+            }
+        });
         jPanel7.add(LhrTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 60, 30));
 
         OtrTxt.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
@@ -461,6 +476,11 @@ public class EmployeeRegister extends javax.swing.JPanel {
         OtrTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 OtrTxtActionPerformed(evt);
+            }
+        });
+        OtrTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                OtrTxtKeyReleased(evt);
             }
         });
         jPanel7.add(OtrTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 60, 30));
@@ -506,15 +526,15 @@ public class EmployeeRegister extends javax.swing.JPanel {
        EmployeeDTO employee = null;
      if(validation()){
         employee = new EmployeeDTO(
-                jTextFieldEmployeeId.getText(),
-                jTextFieldEmployeeName.getText(),
+                TxtEmployeeId.getText(),
+                TxtEmpName.getText(),
                 designationId,
-                Double.parseDouble( jTextFieldSalary.getText()),
+                Double.parseDouble( TxtSalary.getText()),
                 mStatus,
-                jTextFieldAddress.getText(),
-                jTextFieldContactNum.getText(),
+                TxtAddress.getText(),
+                TxtContactNum.getText(),
                 joinDate,
-                TextFieldDateOfBirth.getText(),
+                TextFieldDateOfBirth.getDate().toString(),
                 gender,
                 Double.parseDouble(LhrTxt.getText()),
                 Double.parseDouble(OtrTxt.getText())
@@ -555,12 +575,12 @@ public class EmployeeRegister extends javax.swing.JPanel {
                         mStatus = "Single";
                     }              
                 EmployeeDTO employeeUpdated = new EmployeeDTO(
-                    jTextFieldEmployeeId.getText(),
-                    jTextFieldEmployeeName.getText(),
+                    TxtEmployeeId.getText(),
+                    TxtEmpName.getText(),
                     designationId,
-                    Double.parseDouble( jTextFieldSalary.getText()),
-                    jTextFieldAddress.getText(),
-                    jTextFieldContactNum.getText(),
+                    Double.parseDouble( TxtSalary.getText()),
+                    TxtAddress.getText(),
+                    TxtContactNum.getText(),
                     Double.parseDouble(LhrTxt.getText()),
                     Double.parseDouble(OtrTxt.getText()));
         
@@ -611,31 +631,31 @@ public class EmployeeRegister extends javax.swing.JPanel {
         clearTextFields();
     }//GEN-LAST:event_BtnClearActionPerformed
 
-    private void jComboBoxDesignationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDesignationActionPerformed
-        designation = jComboBoxDesignation.getSelectedItem().toString();
-        selectedDesignation = designations.get(jComboBoxDesignation.getSelectedIndex());
+    private void ComboBoxDesignationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxDesignationActionPerformed
+        designation = ComboBoxDesignation.getSelectedItem().toString();
+        selectedDesignation = designations.get(ComboBoxDesignation.getSelectedIndex());
        // designationId = selectedDesignation.getId();
         designationId = designation;
 
-        jTextFieldSalary.requestFocus(true);
-    }//GEN-LAST:event_jComboBoxDesignationActionPerformed
+        TxtSalary.requestFocus(true);
+    }//GEN-LAST:event_ComboBoxDesignationActionPerformed
 
-    private void jTextFieldContactNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldContactNumActionPerformed
-       String contactNumber=jTextFieldContactNum.getText();
+    private void TxtContactNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtContactNumActionPerformed
+       String contactNumber=TxtContactNum.getText();
        if(contactNumber.matches("[0-9]{10}")){
            DatePickerJoinDate.requestFocus();
        }else{
            JOptionPane.showMessageDialog(this, "Please Enter Phone Number Correct Form"); 
        }
-    }//GEN-LAST:event_jTextFieldContactNumActionPerformed
+    }//GEN-LAST:event_TxtContactNumActionPerformed
 
-    private void jTextFieldAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAddressActionPerformed
-        jTextFieldContactNum.requestFocus();
+    private void TxtAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtAddressActionPerformed
+        TxtContactNum.requestFocus();
         /*jRadioButtonMale.requestFocus(true);
         jRadioButtonFemale.requestFocus(false);
         jRadioButtonMale.requestFocus(false);
         jRadioButtonFemale.requestFocus(true);*/
-    }//GEN-LAST:event_jTextFieldAddressActionPerformed
+    }//GEN-LAST:event_TxtAddressActionPerformed
 
     private void jRadioButtonFemaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonFemaleActionPerformed
         // TODO add your handling code here:
@@ -643,9 +663,9 @@ public class EmployeeRegister extends javax.swing.JPanel {
         LhrTxt.requestFocus();
     }//GEN-LAST:event_jRadioButtonFemaleActionPerformed
 
-    private void jTextFieldEmployeeIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldEmployeeIdActionPerformed
-        jTextFieldEmployeeName.requestFocus();
-    }//GEN-LAST:event_jTextFieldEmployeeIdActionPerformed
+    private void TxtEmployeeIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtEmployeeIdActionPerformed
+        TxtEmpName.requestFocus();
+    }//GEN-LAST:event_TxtEmployeeIdActionPerformed
 
     private void jRadioButtonMaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMaleActionPerformed
         // TODO add your handling code here:
@@ -653,26 +673,22 @@ public class EmployeeRegister extends javax.swing.JPanel {
         LhrTxt.requestFocus();
     }//GEN-LAST:event_jRadioButtonMaleActionPerformed
 
-    private void jTextFieldEmployeeNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldEmployeeNameActionPerformed
-       if(!jTextFieldEmployeeName.getText().matches("([A-Z])\\w+")){
-           //JOptionPane.show
-    }else{
-        jComboBoxDesignation.requestFocus();
-    }
-    }//GEN-LAST:event_jTextFieldEmployeeNameActionPerformed
+    private void TxtEmpNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtEmpNameActionPerformed
+        ComboBoxDesignation.requestFocus();
+    }//GEN-LAST:event_TxtEmpNameActionPerformed
 
     private void jRadioButtonMarriedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMarriedActionPerformed
         mStatus = "Married";
-        jTextFieldAddress.requestFocus();
+        TxtAddress.requestFocus();
     }//GEN-LAST:event_jRadioButtonMarriedActionPerformed
 
-    private void jTextFieldSalaryAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jTextFieldSalaryAncestorAdded
+    private void TxtSalaryAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TxtSalaryAncestorAdded
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldSalaryAncestorAdded
+    }//GEN-LAST:event_TxtSalaryAncestorAdded
 
     private void jRadioButtonSingleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonSingleActionPerformed
         mStatus="Single";
-        jTextFieldAddress.requestFocus();
+        TxtAddress.requestFocus();
     }//GEN-LAST:event_jRadioButtonSingleActionPerformed
 
     private void LhrTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LhrTxtActionPerformed
@@ -688,20 +704,83 @@ public class EmployeeRegister extends javax.swing.JPanel {
         TextFieldDateOfBirth.requestFocus();
     }//GEN-LAST:event_DatePickerJoinDateActionPerformed
 
-    private void TextFieldDateOfBirthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextFieldDateOfBirthActionPerformed
+    private void TxtEmpNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtEmpNameKeyReleased
+        String txt = TxtEmpName.getText();
+        int caretPosition = TxtEmpName.getCaretPosition();
+        if (!txt.matches("^[A-Za-z//]*$")) {
+            TxtEmpName.setText(txt.substring(0, caretPosition - 1) + txt.substring(caretPosition));
+            TxtEmpName.setCaretPosition(caretPosition - 1);
+        }
+    }//GEN-LAST:event_TxtEmpNameKeyReleased
+
+    private void TxtContactNumKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtContactNumKeyReleased
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c) || c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE)) {
+        }
+        String txt = TxtContactNum.getText();
+        int caretPosition = TxtContactNum.getCaretPosition();
+        if (!txt.matches("^[0-9]{0,10}$")) {
+            txt = txt.substring(0, caretPosition - 1) + txt.substring(caretPosition);
+            TxtContactNum.setText(txt);
+            TxtContactNum.setCaretPosition(caretPosition - 1);
+        }
+    }//GEN-LAST:event_TxtContactNumKeyReleased
+
+    private void TxtContactNumKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtContactNumKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TextFieldDateOfBirthActionPerformed
+    }//GEN-LAST:event_TxtContactNumKeyPressed
+
+    private void TxtAddressKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtAddressKeyReleased
+       String txt = TxtAddress.getText();
+        int caretPosition = TxtAddress.getCaretPosition();
+        if (!txt.matches("^[A-Za-z//]*$")) {
+            TxtAddress.setText(txt.substring(0, caretPosition - 1) + txt.substring(caretPosition));
+            TxtAddress.setCaretPosition(caretPosition - 1);
+        }
+    }//GEN-LAST:event_TxtAddressKeyReleased
+
+    private void TxtSalaryKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtSalaryKeyReleased
+        String txt = TxtSalary.getText();
+        int caretPosition = TxtSalary.getCaretPosition();
+        if (!txt.matches("^[\\d]*")) {
+            TxtSalary.setText(txt.substring(0, caretPosition - 1) + txt.substring(caretPosition));
+            TxtSalary.setCaretPosition(caretPosition - 1);
+        }
+    }//GEN-LAST:event_TxtSalaryKeyReleased
+
+    private void LhrTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_LhrTxtKeyReleased
+        String txt = LhrTxt.getText();
+        int caretPosition = LhrTxt.getCaretPosition();
+        if (!txt.matches("^[\\d]*")) {
+            LhrTxt.setText(txt.substring(0, caretPosition - 1) + txt.substring(caretPosition));
+            LhrTxt.setCaretPosition(caretPosition - 1);
+        }
+    }//GEN-LAST:event_LhrTxtKeyReleased
+
+    private void OtrTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_OtrTxtKeyReleased
+        String txt = OtrTxt.getText();
+        int caretPosition = OtrTxt.getCaretPosition();
+        if (!txt.matches("^[\\d]*")) {
+            OtrTxt.setText(txt.substring(0, caretPosition - 1) + txt.substring(caretPosition));
+            OtrTxt.setCaretPosition(caretPosition - 1);
+        }
+    }//GEN-LAST:event_OtrTxtKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnClear;
+    private javax.swing.JComboBox<String> ComboBoxDesignation;
     private org.jdesktop.swingx.JXDatePicker DatePickerJoinDate;
     private javax.swing.JButton Deletebtn;
     private javax.swing.JTextField LhrTxt;
     private javax.swing.JTextField OtrTxt;
     private javax.swing.JButton Savebtn;
-    private javax.swing.JTextField TextFieldDateOfBirth;
-    private javax.swing.JComboBox<String> jComboBoxDesignation;
+    private com.toedter.calendar.JDateChooser TextFieldDateOfBirth;
+    private javax.swing.JTextField TxtAddress;
+    private javax.swing.JTextField TxtContactNum;
+    private javax.swing.JTextField TxtEmpName;
+    private javax.swing.JTextField TxtEmployeeId;
+    private javax.swing.JTextField TxtSalary;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -731,24 +810,18 @@ public class EmployeeRegister extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator17;
     private javax.swing.JSeparator jSeparator19;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator20;
     private javax.swing.JSeparator jSeparator21;
     private javax.swing.JSeparator jSeparator22;
     private javax.swing.JSeparator jSeparator4;
     private org.jdesktop.swingx.JXTable jTableEmployee;
-    private javax.swing.JTextField jTextFieldAddress;
-    private javax.swing.JTextField jTextFieldContactNum;
-    private javax.swing.JTextField jTextFieldEmployeeId;
-    private javax.swing.JTextField jTextFieldEmployeeName;
-    private javax.swing.JTextField jTextFieldSalary;
     private java.awt.ScrollPane scrollPane1;
     // End of variables declaration//GEN-END:variables
 
     private void groupButtonGrnder() {
-        bg=new ButtonGroup();
+        btng=new ButtonGroup();
         
-        bg.add(jRadioButtonMale);
-        bg.add(jRadioButtonFemale);
+        btng.add(jRadioButtonMale);
+        btng.add(jRadioButtonFemale);
         
         
     }
@@ -759,7 +832,7 @@ public class EmployeeRegister extends javax.swing.JPanel {
             Vector model = new Vector();
             
             for (DesignationDTO designation : designations) {
-              jComboBoxDesignation.addItem(designation.getName());
+              ComboBoxDesignation.addItem(designation.getName());
                model.addElement(new DesignationDTO(designation.getId(), designation.getName()));
             }
         } catch (Exception ex) {
@@ -805,16 +878,17 @@ public class EmployeeRegister extends javax.swing.JPanel {
     }
 
     private void clearTextFields() {
-        jTextFieldEmployeeId.setText("");
-        jTextFieldEmployeeName.setText("");
-        jTextFieldSalary.setText("");
-        jTextFieldAddress.setText("");
-        jTextFieldContactNum.setText("");
+        TxtEmployeeId.setText("");
+        TxtEmpName.setText("");
+        TxtSalary.setText("");
+        TxtAddress.setText("");
+        TxtContactNum.setText("");
         DatePickerJoinDate.setDate(null);
-        TextFieldDateOfBirth.setText("");
+        TextFieldDateOfBirth.setDate(null);
         LhrTxt.setText("");
         OtrTxt.setText("");
         bg.clearSelection();
+        btng.clearSelection();
         
         
         
@@ -824,7 +898,7 @@ public class EmployeeRegister extends javax.swing.JPanel {
         try {
             String employeeId;
             employeeId = IdGenerater.getNewID("employee", "Id", "E");
-            jTextFieldEmployeeId.setText(employeeId);
+            TxtEmployeeId.setText(employeeId);
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeRegister.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -834,9 +908,9 @@ public class EmployeeRegister extends javax.swing.JPanel {
     
     private boolean validation(){
           
-        if(jTextFieldEmployeeName.getText().equals("") || jTextFieldSalary.getText().equals("") || jTextFieldAddress.getText().equals("") || jTextFieldContactNum.getText().equals("") || LhrTxt.getText().equals("") || OtrTxt.getText().equals("")){
+        if(TxtEmpName.getText().equals("") || TxtSalary.getText().equals("") || TxtAddress.getText().equals("") || TxtContactNum.getText().equals("") || LhrTxt.getText().equals("") || OtrTxt.getText().equals("")){
             return false;
-        }else if(jTextFieldEmployeeName.getText()== null || jTextFieldSalary.getText()== null || jTextFieldAddress.getText()== null || jTextFieldContactNum.getText()== null || LhrTxt.getText()== null || OtrTxt.getText()== null){
+        }else if(TxtEmpName.getText()== null || TxtSalary.getText()== null || TxtAddress.getText()== null || TxtContactNum.getText()== null || LhrTxt.getText()== null || OtrTxt.getText()== null){
             return false;
         }
         return true;

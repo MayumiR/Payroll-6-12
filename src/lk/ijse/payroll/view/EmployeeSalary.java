@@ -12,35 +12,37 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import lk.ijse.payroll.common.IdGenerater;
 import lk.ijse.payroll.controller.AllowanceController;
 import lk.ijse.payroll.controller.DeductionController;
 import lk.ijse.payroll.controller.EmployeeAttendanceController;
 import lk.ijse.payroll.controller.EmployeeRegisterController;
+import lk.ijse.payroll.controller.EmployeeSalaryController;
 import lk.ijse.payroll.dbconnection.DBConnection;
 import lk.ijse.payroll.entity.Allowance;
 import lk.ijse.payroll.model.AllowanceDTO;
 import lk.ijse.payroll.model.AttendanceDTO;
 import lk.ijse.payroll.model.DeductionDTO;
 import lk.ijse.payroll.model.EmployeeDTO;
+import lk.ijse.payroll.model.SalaryDTO;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
-import org.jfree.util.HashNMap;
 
 /**
  *
  * @author Shashika
  */
 public class EmployeeSalary extends javax.swing.JPanel {
-    private String employeeName;
+    private String employeeName ,selectDate;
 
     /** Creates new form EmployeeSalary */
     public EmployeeSalary() {
         initComponents();
         loadEmployeeName();
+        genarateSalaryId();
     }
 
     /** This method is called from within the constructor to
@@ -69,43 +71,42 @@ public class EmployeeSalary extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jSeparator11 = new javax.swing.JSeparator();
-        jTextFieldTotalIncentives = new javax.swing.JTextField();
+        TxtTotalAllowance = new javax.swing.JTextField();
         jSeparator6 = new javax.swing.JSeparator();
-        jTextFieldHouseRentAllo = new javax.swing.JTextField();
+        TxtHouseAllowance = new javax.swing.JTextField();
         jSeparator7 = new javax.swing.JSeparator();
-        jTextFieldCapitalCost = new javax.swing.JTextField();
+        TxtVehicleAllowance = new javax.swing.JTextField();
         jSeparator10 = new javax.swing.JSeparator();
-        jTextFieldMedical = new javax.swing.JTextField();
+        TxtMedical = new javax.swing.JTextField();
         jSeparator5 = new javax.swing.JSeparator();
         jLabelIncentivesAmount1 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jSeparator16 = new javax.swing.JSeparator();
-        jTextFieldTotalDedution = new javax.swing.JTextField();
+        TxtTotalDeducton = new javax.swing.JTextField();
         jSeparator15 = new javax.swing.JSeparator();
-        jTextFieldInsuarance = new javax.swing.JTextField();
+        TxtInsurance = new javax.swing.JTextField();
         jSeparator13 = new javax.swing.JSeparator();
-        jTextFieldWelfare = new javax.swing.JTextField();
+        TxtWelfare = new javax.swing.JTextField();
         jSeparator12 = new javax.swing.JSeparator();
-        jTextFieldETF = new javax.swing.JTextField();
+        TxtEPF = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jSeparator17 = new javax.swing.JSeparator();
-        jTextFieldNetSalary = new javax.swing.JTextField();
+        TxtNetSalary = new javax.swing.JTextField();
         jLabelAdd = new javax.swing.JLabel();
         jLabelCancel = new javax.swing.JLabel();
         jSeparator20 = new javax.swing.JSeparator();
-        TxtSalary = new javax.swing.JTextField();
-        jXDatePicker1 = new org.jdesktop.swingx.JXDatePicker();
+        TxtBasicSalary = new javax.swing.JTextField();
+        DatePickerDate = new org.jdesktop.swingx.JXDatePicker();
         jSeparator21 = new javax.swing.JSeparator();
         TxtDesignation = new javax.swing.JTextField();
         jSeparator22 = new javax.swing.JSeparator();
-        TxtId = new javax.swing.JTextField();
+        TxtEmployeeId = new javax.swing.JTextField();
         jLabelBasicSalary1 = new javax.swing.JLabel();
         jSeparator23 = new javax.swing.JSeparator();
         TxtSalaryId = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        ButtonPaySlip = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jSeparator14 = new javax.swing.JSeparator();
@@ -115,6 +116,18 @@ public class EmployeeSalary extends javax.swing.JPanel {
         jSeparator19 = new javax.swing.JSeparator();
         TxtLateHoursRate = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jSeparator25 = new javax.swing.JSeparator();
+        jTextFieldEPF1 = new javax.swing.JTextField();
+        jSeparator26 = new javax.swing.JSeparator();
+        jTextFieldEPF2 = new javax.swing.JTextField();
+        jSeparator27 = new javax.swing.JSeparator();
+        TxtETF = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        ButtonAdd1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1156, 760));
@@ -149,18 +162,18 @@ public class EmployeeSalary extends javax.swing.JPanel {
         jLabelDesignation.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
         jLabelDesignation.setForeground(new java.awt.Color(31, 58, 147));
         jLabelDesignation.setText("Designation");
-        add(jLabelDesignation, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 110, 30));
+        add(jLabelDesignation, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 110, 30));
 
         jLabel1.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(31, 58, 147));
         jLabel1.setText("Date");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 90, 50, 30));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 140, 50, 30));
 
         jLabelEmployeeID.setBackground(new java.awt.Color(1, 50, 67));
         jLabelEmployeeID.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
         jLabelEmployeeID.setForeground(new java.awt.Color(31, 58, 147));
         jLabelEmployeeID.setText("Employee ID");
-        add(jLabelEmployeeID, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, 110, 30));
+        add(jLabelEmployeeID, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 110, 30));
 
         jComboBoxEmpName.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
         jComboBoxEmpName.setForeground(new java.awt.Color(31, 58, 147));
@@ -174,10 +187,10 @@ public class EmployeeSalary extends javax.swing.JPanel {
         jLabelBasicSalary.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
         jLabelBasicSalary.setForeground(new java.awt.Color(31, 58, 147));
         jLabelBasicSalary.setText("Basic Salary");
-        add(jLabelBasicSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 170, 110, 30));
+        add(jLabelBasicSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 90, 110, 30));
 
         jSeparator3.setForeground(new java.awt.Color(31, 58, 147));
-        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 1760, 10));
+        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 1760, 10));
 
         jLabelIncentivesAmount.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
         jLabelIncentivesAmount.setForeground(new java.awt.Color(31, 58, 147));
@@ -209,74 +222,69 @@ public class EmployeeSalary extends javax.swing.JPanel {
         jSeparator11.setOpaque(true);
         add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 570, 170, -1));
 
-        jTextFieldTotalIncentives.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
-        jTextFieldTotalIncentives.setForeground(new java.awt.Color(31, 58, 147));
-        jTextFieldTotalIncentives.setBorder(null);
-        jTextFieldTotalIncentives.addActionListener(new java.awt.event.ActionListener() {
+        TxtTotalAllowance.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
+        TxtTotalAllowance.setForeground(new java.awt.Color(31, 58, 147));
+        TxtTotalAllowance.setBorder(null);
+        TxtTotalAllowance.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldTotalIncentivesActionPerformed(evt);
+                TxtTotalAllowanceActionPerformed(evt);
             }
         });
-        add(jTextFieldTotalIncentives, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 540, 170, 30));
+        add(TxtTotalAllowance, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 540, 170, 30));
 
         jSeparator6.setBackground(new java.awt.Color(31, 58, 147));
         jSeparator6.setForeground(new java.awt.Color(31, 58, 147));
         jSeparator6.setOpaque(true);
         add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 340, 170, -1));
 
-        jTextFieldHouseRentAllo.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
-        jTextFieldHouseRentAllo.setForeground(new java.awt.Color(31, 58, 147));
-        jTextFieldHouseRentAllo.setBorder(null);
-        jTextFieldHouseRentAllo.addActionListener(new java.awt.event.ActionListener() {
+        TxtHouseAllowance.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
+        TxtHouseAllowance.setForeground(new java.awt.Color(31, 58, 147));
+        TxtHouseAllowance.setBorder(null);
+        TxtHouseAllowance.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldHouseRentAlloActionPerformed(evt);
+                TxtHouseAllowanceActionPerformed(evt);
             }
         });
-        add(jTextFieldHouseRentAllo, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 310, 170, 30));
+        add(TxtHouseAllowance, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 310, 170, 30));
 
         jSeparator7.setBackground(new java.awt.Color(31, 58, 147));
         jSeparator7.setForeground(new java.awt.Color(31, 58, 147));
         jSeparator7.setOpaque(true);
         add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 390, 170, -1));
 
-        jTextFieldCapitalCost.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
-        jTextFieldCapitalCost.setForeground(new java.awt.Color(31, 58, 147));
-        jTextFieldCapitalCost.setBorder(null);
-        jTextFieldCapitalCost.addActionListener(new java.awt.event.ActionListener() {
+        TxtVehicleAllowance.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
+        TxtVehicleAllowance.setForeground(new java.awt.Color(31, 58, 147));
+        TxtVehicleAllowance.setBorder(null);
+        TxtVehicleAllowance.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldCapitalCostActionPerformed(evt);
+                TxtVehicleAllowanceActionPerformed(evt);
             }
         });
-        add(jTextFieldCapitalCost, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 360, 170, 30));
+        add(TxtVehicleAllowance, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 360, 170, 30));
 
         jSeparator10.setBackground(new java.awt.Color(31, 58, 147));
         jSeparator10.setForeground(new java.awt.Color(31, 58, 147));
         jSeparator10.setOpaque(true);
         add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 440, 170, -1));
 
-        jTextFieldMedical.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
-        jTextFieldMedical.setForeground(new java.awt.Color(31, 58, 147));
-        jTextFieldMedical.setBorder(null);
-        jTextFieldMedical.addActionListener(new java.awt.event.ActionListener() {
+        TxtMedical.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
+        TxtMedical.setForeground(new java.awt.Color(31, 58, 147));
+        TxtMedical.setBorder(null);
+        TxtMedical.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldMedicalActionPerformed(evt);
+                TxtMedicalActionPerformed(evt);
             }
         });
-        add(jTextFieldMedical, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 410, 170, 30));
+        add(TxtMedical, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 410, 170, 30));
 
         jSeparator5.setForeground(new java.awt.Color(31, 58, 147));
         jSeparator5.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 260, 10, 430));
+        add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 280, 10, 430));
 
         jLabelIncentivesAmount1.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
         jLabelIncentivesAmount1.setForeground(new java.awt.Color(31, 58, 147));
         jLabelIncentivesAmount1.setText("Deduction Amount");
         add(jLabelIncentivesAmount1, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 260, 220, 40));
-
-        jLabel8.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(31, 58, 147));
-        jLabel8.setText("E.P.F");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 310, 200, 30));
 
         jLabel9.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(31, 58, 147));
@@ -298,60 +306,60 @@ public class EmployeeSalary extends javax.swing.JPanel {
         jSeparator16.setOpaque(true);
         add(jSeparator16, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 550, 140, -1));
 
-        jTextFieldTotalDedution.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
-        jTextFieldTotalDedution.setForeground(new java.awt.Color(31, 58, 147));
-        jTextFieldTotalDedution.setBorder(null);
-        jTextFieldTotalDedution.addActionListener(new java.awt.event.ActionListener() {
+        TxtTotalDeducton.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
+        TxtTotalDeducton.setForeground(new java.awt.Color(31, 58, 147));
+        TxtTotalDeducton.setBorder(null);
+        TxtTotalDeducton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldTotalDedutionActionPerformed(evt);
+                TxtTotalDeductonActionPerformed(evt);
             }
         });
-        add(jTextFieldTotalDedution, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 520, 140, 30));
+        add(TxtTotalDeducton, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 520, 140, 30));
 
         jSeparator15.setBackground(new java.awt.Color(31, 58, 147));
         jSeparator15.setForeground(new java.awt.Color(31, 58, 147));
         jSeparator15.setOpaque(true);
         add(jSeparator15, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 450, 140, -1));
 
-        jTextFieldInsuarance.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
-        jTextFieldInsuarance.setForeground(new java.awt.Color(31, 58, 147));
-        jTextFieldInsuarance.setBorder(null);
-        jTextFieldInsuarance.addActionListener(new java.awt.event.ActionListener() {
+        TxtInsurance.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
+        TxtInsurance.setForeground(new java.awt.Color(31, 58, 147));
+        TxtInsurance.setBorder(null);
+        TxtInsurance.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldInsuaranceActionPerformed(evt);
+                TxtInsuranceActionPerformed(evt);
             }
         });
-        add(jTextFieldInsuarance, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 420, 140, 30));
+        add(TxtInsurance, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 420, 140, 30));
 
         jSeparator13.setBackground(new java.awt.Color(31, 58, 147));
         jSeparator13.setForeground(new java.awt.Color(31, 58, 147));
         jSeparator13.setOpaque(true);
         add(jSeparator13, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 390, 140, -1));
 
-        jTextFieldWelfare.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
-        jTextFieldWelfare.setForeground(new java.awt.Color(31, 58, 147));
-        jTextFieldWelfare.setBorder(null);
-        jTextFieldWelfare.addActionListener(new java.awt.event.ActionListener() {
+        TxtWelfare.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
+        TxtWelfare.setForeground(new java.awt.Color(31, 58, 147));
+        TxtWelfare.setBorder(null);
+        TxtWelfare.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldWelfareActionPerformed(evt);
+                TxtWelfareActionPerformed(evt);
             }
         });
-        add(jTextFieldWelfare, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 360, 140, 30));
+        add(TxtWelfare, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 360, 140, 30));
 
         jSeparator12.setBackground(new java.awt.Color(31, 58, 147));
         jSeparator12.setForeground(new java.awt.Color(31, 58, 147));
         jSeparator12.setOpaque(true);
         add(jSeparator12, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 340, 140, -1));
 
-        jTextFieldETF.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
-        jTextFieldETF.setForeground(new java.awt.Color(31, 58, 147));
-        jTextFieldETF.setBorder(null);
-        jTextFieldETF.addActionListener(new java.awt.event.ActionListener() {
+        TxtEPF.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
+        TxtEPF.setForeground(new java.awt.Color(31, 58, 147));
+        TxtEPF.setBorder(null);
+        TxtEPF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldETFActionPerformed(evt);
+                TxtEPFActionPerformed(evt);
             }
         });
-        add(jTextFieldETF, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 310, 140, 30));
+        add(TxtEPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 310, 140, 30));
 
         jLabel14.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(31, 58, 147));
@@ -363,15 +371,15 @@ public class EmployeeSalary extends javax.swing.JPanel {
         jSeparator17.setOpaque(true);
         add(jSeparator17, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 670, 200, -1));
 
-        jTextFieldNetSalary.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
-        jTextFieldNetSalary.setForeground(new java.awt.Color(31, 58, 147));
-        jTextFieldNetSalary.setBorder(null);
-        jTextFieldNetSalary.addActionListener(new java.awt.event.ActionListener() {
+        TxtNetSalary.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
+        TxtNetSalary.setForeground(new java.awt.Color(31, 58, 147));
+        TxtNetSalary.setBorder(null);
+        TxtNetSalary.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNetSalaryActionPerformed(evt);
+                TxtNetSalaryActionPerformed(evt);
             }
         });
-        add(jTextFieldNetSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 640, 200, 30));
+        add(TxtNetSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 640, 200, 30));
 
         jLabelAdd.setBackground(new java.awt.Color(34, 49, 63));
         jLabelAdd.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
@@ -393,31 +401,31 @@ public class EmployeeSalary extends javax.swing.JPanel {
         jSeparator20.setBackground(new java.awt.Color(31, 58, 147));
         jSeparator20.setForeground(new java.awt.Color(31, 58, 147));
         jSeparator20.setOpaque(true);
-        add(jSeparator20, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 200, 150, -1));
+        add(jSeparator20, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 120, 150, -1));
 
-        TxtSalary.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
-        TxtSalary.setForeground(new java.awt.Color(31, 58, 147));
-        TxtSalary.setBorder(null);
-        TxtSalary.addActionListener(new java.awt.event.ActionListener() {
+        TxtBasicSalary.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
+        TxtBasicSalary.setForeground(new java.awt.Color(31, 58, 147));
+        TxtBasicSalary.setBorder(null);
+        TxtBasicSalary.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtSalaryActionPerformed(evt);
+                TxtBasicSalaryActionPerformed(evt);
             }
         });
-        add(TxtSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 170, 150, 30));
+        add(TxtBasicSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 90, 150, 30));
 
-        jXDatePicker1.setForeground(new java.awt.Color(31, 58, 147));
-        jXDatePicker1.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 12)); // NOI18N
-        jXDatePicker1.addActionListener(new java.awt.event.ActionListener() {
+        DatePickerDate.setForeground(new java.awt.Color(31, 58, 147));
+        DatePickerDate.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 12)); // NOI18N
+        DatePickerDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jXDatePicker1ActionPerformed(evt);
+                DatePickerDateActionPerformed(evt);
             }
         });
-        add(jXDatePicker1, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 90, 150, 30));
+        add(DatePickerDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 140, 150, 30));
 
         jSeparator21.setBackground(new java.awt.Color(31, 58, 147));
         jSeparator21.setForeground(new java.awt.Color(31, 58, 147));
         jSeparator21.setOpaque(true);
-        add(jSeparator21, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 180, -1));
+        add(jSeparator21, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 180, -1));
 
         TxtDesignation.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
         TxtDesignation.setForeground(new java.awt.Color(31, 58, 147));
@@ -427,32 +435,37 @@ public class EmployeeSalary extends javax.swing.JPanel {
                 TxtDesignationActionPerformed(evt);
             }
         });
-        add(TxtDesignation, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, 180, 30));
+        TxtDesignation.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TxtDesignationKeyReleased(evt);
+            }
+        });
+        add(TxtDesignation, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, 180, 30));
 
         jSeparator22.setBackground(new java.awt.Color(31, 58, 147));
         jSeparator22.setForeground(new java.awt.Color(31, 58, 147));
         jSeparator22.setOpaque(true);
-        add(jSeparator22, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 120, 60, -1));
+        add(jSeparator22, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, 60, -1));
 
-        TxtId.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
-        TxtId.setForeground(new java.awt.Color(31, 58, 147));
-        TxtId.setBorder(null);
-        TxtId.addActionListener(new java.awt.event.ActionListener() {
+        TxtEmployeeId.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
+        TxtEmployeeId.setForeground(new java.awt.Color(31, 58, 147));
+        TxtEmployeeId.setBorder(null);
+        TxtEmployeeId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtIdActionPerformed(evt);
+                TxtEmployeeIdActionPerformed(evt);
             }
         });
-        add(TxtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 90, 60, 30));
+        add(TxtEmployeeId, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 60, 30));
 
         jLabelBasicSalary1.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
         jLabelBasicSalary1.setForeground(new java.awt.Color(31, 58, 147));
         jLabelBasicSalary1.setText("Salary Id");
-        add(jLabelBasicSalary1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 170, 110, 30));
+        add(jLabelBasicSalary1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 190, 110, 30));
 
         jSeparator23.setBackground(new java.awt.Color(31, 58, 147));
         jSeparator23.setForeground(new java.awt.Color(31, 58, 147));
         jSeparator23.setOpaque(true);
-        add(jSeparator23, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 200, 60, -1));
+        add(jSeparator23, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 220, 60, -1));
 
         TxtSalaryId.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
         TxtSalaryId.setForeground(new java.awt.Color(31, 58, 147));
@@ -462,15 +475,15 @@ public class EmployeeSalary extends javax.swing.JPanel {
                 TxtSalaryIdActionPerformed(evt);
             }
         });
-        add(TxtSalaryId, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 170, 60, 30));
+        add(TxtSalaryId, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 190, 60, 30));
 
-        jButton1.setText("Print");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        ButtonPaySlip.setText("Add");
+        ButtonPaySlip.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                ButtonPaySlipActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 620, 110, 30));
+        add(ButtonPaySlip, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 620, 130, 30));
 
         jLabel5.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(31, 58, 147));
@@ -531,75 +544,175 @@ public class EmployeeSalary extends javax.swing.JPanel {
         jLabel15.setForeground(new java.awt.Color(31, 58, 147));
         jLabel15.setText("Late Hours Rate");
         add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 470, 140, 30));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Further Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Yu Gothic UI Semibold", 0, 12))); // NOI18N
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel8.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(31, 58, 147));
+        jLabel8.setText("E.T.F     3%");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 90, 30));
+
+        jLabel17.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 14)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(31, 58, 147));
+        jLabel17.setText("E.P.F    8%");
+        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 80, 30));
+
+        jLabel18.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 14)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(31, 58, 147));
+        jLabel18.setText("E.P.F    12%");
+        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 90, 30));
+
+        jSeparator25.setBackground(new java.awt.Color(31, 58, 147));
+        jSeparator25.setForeground(new java.awt.Color(31, 58, 147));
+        jSeparator25.setOpaque(true);
+        jPanel1.add(jSeparator25, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 80, -1));
+
+        jTextFieldEPF1.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
+        jTextFieldEPF1.setForeground(new java.awt.Color(31, 58, 147));
+        jTextFieldEPF1.setBorder(null);
+        jTextFieldEPF1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldEPF1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jTextFieldEPF1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 80, 30));
+
+        jSeparator26.setBackground(new java.awt.Color(31, 58, 147));
+        jSeparator26.setForeground(new java.awt.Color(31, 58, 147));
+        jSeparator26.setOpaque(true);
+        jPanel1.add(jSeparator26, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 80, -1));
+
+        jTextFieldEPF2.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
+        jTextFieldEPF2.setForeground(new java.awt.Color(31, 58, 147));
+        jTextFieldEPF2.setBorder(null);
+        jTextFieldEPF2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldEPF2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jTextFieldEPF2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 80, 30));
+
+        jSeparator27.setBackground(new java.awt.Color(31, 58, 147));
+        jSeparator27.setForeground(new java.awt.Color(31, 58, 147));
+        jSeparator27.setOpaque(true);
+        jPanel1.add(jSeparator27, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 80, -1));
+
+        TxtETF.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
+        TxtETF.setForeground(new java.awt.Color(31, 58, 147));
+        TxtETF.setBorder(null);
+        TxtETF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtETFActionPerformed(evt);
+            }
+        });
+        jPanel1.add(TxtETF, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 80, 30));
+
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 80, 250, 160));
+
+        jLabel16.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(31, 58, 147));
+        jLabel16.setText("E.P.F");
+        add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 310, 200, 30));
+
+        ButtonAdd1.setText("Pay Slip");
+        ButtonAdd1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonAdd1ActionPerformed(evt);
+            }
+        });
+        add(ButtonAdd1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 620, 110, 30));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldTotalIncentivesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTotalIncentivesActionPerformed
+    private void TxtTotalAllowanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtTotalAllowanceActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldTotalIncentivesActionPerformed
+    }//GEN-LAST:event_TxtTotalAllowanceActionPerformed
 
-    private void jTextFieldHouseRentAlloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldHouseRentAlloActionPerformed
+    private void TxtHouseAllowanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtHouseAllowanceActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldHouseRentAlloActionPerformed
+    }//GEN-LAST:event_TxtHouseAllowanceActionPerformed
 
-    private void jTextFieldCapitalCostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCapitalCostActionPerformed
+    private void TxtVehicleAllowanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtVehicleAllowanceActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldCapitalCostActionPerformed
+    }//GEN-LAST:event_TxtVehicleAllowanceActionPerformed
 
-    private void jTextFieldMedicalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldMedicalActionPerformed
+    private void TxtMedicalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtMedicalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldMedicalActionPerformed
+    }//GEN-LAST:event_TxtMedicalActionPerformed
 
-    private void jTextFieldTotalDedutionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTotalDedutionActionPerformed
+    private void TxtTotalDeductonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtTotalDeductonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldTotalDedutionActionPerformed
+    }//GEN-LAST:event_TxtTotalDeductonActionPerformed
 
-    private void jTextFieldInsuaranceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldInsuaranceActionPerformed
+    private void TxtInsuranceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtInsuranceActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldInsuaranceActionPerformed
+    }//GEN-LAST:event_TxtInsuranceActionPerformed
 
-    private void jTextFieldWelfareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldWelfareActionPerformed
+    private void TxtWelfareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtWelfareActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldWelfareActionPerformed
+    }//GEN-LAST:event_TxtWelfareActionPerformed
 
-    private void jTextFieldETFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldETFActionPerformed
+    private void TxtEPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtEPFActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldETFActionPerformed
+    }//GEN-LAST:event_TxtEPFActionPerformed
 
-    private void jTextFieldNetSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNetSalaryActionPerformed
+    private void TxtNetSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtNetSalaryActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldNetSalaryActionPerformed
+    }//GEN-LAST:event_TxtNetSalaryActionPerformed
 
-    private void TxtSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtSalaryActionPerformed
+    private void TxtBasicSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtBasicSalaryActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TxtSalaryActionPerformed
+    }//GEN-LAST:event_TxtBasicSalaryActionPerformed
 
     private void TxtDesignationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtDesignationActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtDesignationActionPerformed
 
-    private void TxtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtIdActionPerformed
+    private void TxtEmployeeIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtEmployeeIdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TxtIdActionPerformed
+    }//GEN-LAST:event_TxtEmployeeIdActionPerformed
 
     private void TxtSalaryIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtSalaryIdActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtSalaryIdActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       InputStream input=getClass().getResourceAsStream("/lk/ijse/payroll/report/Employee1.jasper");
-       HashMap map=new HashMap();
-       
-        try {
-            JasperPrint jasperPrint=JasperFillManager.fillReport(input, map,DBConnection.getInstance().getConnection());
-            JasperViewer.viewReport(jasperPrint);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(EmployeeSalary.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(EmployeeSalary.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JRException ex) {
-            Logger.getLogger(EmployeeSalary.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void ButtonPaySlipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonPaySlipActionPerformed
+         SalaryDTO salary =new SalaryDTO(
+                TxtSalaryId.getText(), 
+                TxtEmployeeId.getText(),
+                selectDate,
+                Double.parseDouble(TxtHouseAllowance.getText()),
+                Double.parseDouble(TxtVehicleAllowance.getText()),
+                Double.parseDouble(TxtMedical.getText()),
+                Double.parseDouble(TxtOverTime.getText()),
+                Double.parseDouble(TxtTotalAllowance.getText()),
+                Double.parseDouble(TxtEPF.getText()),
+                Double.parseDouble(TxtETF.getText()),
+                Double.parseDouble(TxtWelfare.getText()),
+                Double.parseDouble(TxtInsurance.getText()),
+                Double.parseDouble(TxtLateHoursRate.getText()),
+                Double.parseDouble(TxtTotalDeducton.getText()),
+                Double.parseDouble(TxtGrossSalary.getText()),
+                Double.parseDouble(TxtNetSalary.getText()),
+                Double.parseDouble(TxtBasicSalary.getText()));
+           try {
+                
+                boolean result = EmployeeSalaryController.addSalary(salary);
+                //if(validation()){
+                    if (result){
+                        JOptionPane.showMessageDialog(this, "Saved successfully");
+                     
+                        clearTextFields();
+                    }else{
+                        JOptionPane.showMessageDialog(this, "Failed to Save");
+                    }
+                //}
+            } catch (Exception ex) {
+                Logger.getLogger(EmployeeSalary.class.getName()).log(Level.SEVERE, null, ex);
+            }
+ 
+    }//GEN-LAST:event_ButtonPaySlipActionPerformed
 
     private void jComboBoxEmpNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEmpNameActionPerformed
     employeeName = jComboBoxEmpName.getSelectedItem().toString();
@@ -608,9 +721,9 @@ public class EmployeeSalary extends javax.swing.JPanel {
             EmployeeDTO employee=EmployeeRegisterController.searchEmployee(empoyeeName);
             ArrayList<AllowanceDTO> allowanceList ;
             if(employee!=null){
-                TxtId.setText(employee.getId());
+                TxtEmployeeId.setText(employee.getId());
                 TxtDesignation.setText(employee.getDesignation());
-                TxtSalary.setText(""+employee.getSalary());
+                TxtBasicSalary.setText(""+employee.getSalary());
             }
         } catch (Exception ex) {
             Logger.getLogger(EmployeeSalary.class.getName()).log(Level.SEVERE, null, ex);
@@ -618,31 +731,26 @@ public class EmployeeSalary extends javax.swing.JPanel {
     
     }//GEN-LAST:event_jComboBoxEmpNameActionPerformed
 
-    private void jXDatePicker1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXDatePicker1ActionPerformed
+    private void DatePickerDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DatePickerDateActionPerformed
         employeeName = jComboBoxEmpName.getSelectedItem().toString();
-        double hraAmt =0.0,vaAmt =0.0,medicalAmt =0.0, totalAllowance = 0.0, epfAmt=0.0, welFareAmt=0.0, insuaranceAmt=0.0, totalDeduction=0.0, othours=0.0, otrate=0.0, LateHrshours=0.0,LateHrsrate=0.0, grossSalary=0.0;
-        String selectDate = ""+new java.sql.Date( jXDatePicker1.getDate().getTime());
+        double salary, hraAmt =0.0,vaAmt =0.0,medicalAmt =0.0, totalAllowance = 0.0, epfAmt=0.0, welFareAmt=0.0, insuaranceAmt=0.0, totalDeduction=0.0, othours=0.0, otrate=0.0, LateHrshours=0.0,LateHrsrate=0.0, grossSalary=0.0;
+        selectDate = ""+new java.sql.Date( DatePickerDate.getDate().getTime());
         
         try {
             String empoyeeName=(String) jComboBoxEmpName.getSelectedItem();
             EmployeeDTO employee=EmployeeRegisterController.searchEmployee(empoyeeName);
             if(employee!=null){
-               //System.out.print("Date>>>>>>>"+selectDate); 
+               
             ArrayList<AttendanceDTO> attendanceList = EmployeeAttendanceController.getAttendanceById(employee.getId());
-            
             for(AttendanceDTO attendance : attendanceList){
                 othours += attendance.getOThrs();
-            }
-                otrate = employee.getOverTimeHoursRate();
-                
-            for(AttendanceDTO attendance : attendanceList){
                 LateHrshours += attendance.getLateHrs();
             }
-                
+                otrate = employee.getOverTimeHoursRate();
                 LateHrsrate = employee.getLateHoursRate();
                 
-               ArrayList<AllowanceDTO> allowanceList = AllowanceController.getAllowanceByIdAndDate(employee.getId(),selectDate);
-               //System.out.print("Show>>>>>>>"+allowanceList.toString());
+             ArrayList<AllowanceDTO> allowanceList = AllowanceController.getAllowanceByIdAndDate(employee.getId(),selectDate);
+               
                 for(AllowanceDTO allowance : allowanceList){
                     hraAmt += allowance.getHouserentAllowance();
                     vaAmt += allowance.getVehicleAllowance();
@@ -652,45 +760,49 @@ public class EmployeeSalary extends javax.swing.JPanel {
                 totalAllowance = hraAmt+vaAmt+medicalAmt+otrate;
                 
                
-                ArrayList<DeductionDTO> deductionlist = DeductionController.getDeductionByIdAndDate(employee.getId(),selectDate);
+            ArrayList<DeductionDTO> deductionlist = DeductionController.getDeductionByIdAndDate(employee.getId(),selectDate);
                 
                 for(DeductionDTO deduction : deductionlist){
                     epfAmt += deduction.getEpf();
                     welFareAmt += deduction.getWelFare();
                     insuaranceAmt += deduction.getInsurance();
                 }
-                totalDeduction = epfAmt+welFareAmt+insuaranceAmt+LateHrsrate;
                 
-//                double salary=Double.parseDouble(TxtSalary.getText());
-//                double totalAlow=Double.parseDouble(jTextFieldTotalIncentives.getText());
-//                TxtGrossSalary.setText(salary+totalAlow+"");
                 totalDeduction = epfAmt+welFareAmt+insuaranceAmt+LateHrsrate;
                
-                double salary=Double.parseDouble(TxtSalary.getText());
-                System.out.print("Show salary>>>>>>>"+salary);
-                double totalAlow=Double.parseDouble(jTextFieldTotalIncentives.getText());
-                System.out.print("Show allowance>>>>>>>"+totalAlow);
-                double gross = salary + totalAlow;
-                System.out.print("Show gross>>>>>>>"+gross);
-                TxtGrossSalary.setText(gross+"");
-//                
-                jTextFieldHouseRentAllo.setText(""+hraAmt);
-                jTextFieldCapitalCost.setText(""+vaAmt);
-                jTextFieldMedical.setText(""+medicalAmt);
-                TxtOverTime.setText(""+otrate);
-                jTextFieldTotalIncentives.setText(""+totalAllowance);
                 
-                jTextFieldETF.setText(""+epfAmt);
-                jTextFieldWelfare.setText(""+welFareAmt);
-                jTextFieldInsuarance.setText(""+insuaranceAmt);
+                
+                TxtHouseAllowance.setText(""+hraAmt);
+                TxtVehicleAllowance.setText(""+vaAmt);
+                TxtMedical.setText(""+medicalAmt);
+                TxtOverTime.setText(""+otrate);
+                TxtTotalAllowance.setText(""+totalAllowance);
+                
+                TxtEPF.setText(""+epfAmt);
+                TxtWelfare.setText(""+welFareAmt);
+                TxtInsurance.setText(""+insuaranceAmt);
                 TxtLateHoursRate.setText(""+LateHrsrate);
-                jTextFieldTotalDedution.setText(""+totalDeduction);
+                TxtTotalDeducton.setText(""+totalDeduction);
+                
+                salary=Double.parseDouble(TxtBasicSalary.getText());
+                double totalAlow=Double.parseDouble(TxtTotalAllowance.getText());
+                double gross = salary + totalAlow;
+                TxtGrossSalary.setText(gross+"");
+                
+                double netSalary= gross-totalDeduction;
+                TxtNetSalary.setText(""+netSalary);
+                
+                salary  = Double.parseDouble(TxtBasicSalary.getText());
+                double percentage = 3;
+                double etf = (salary * percentage)/100;
+                System.out.println(""+salary+","+etf);
+                TxtETF.setText(""+etf);
               
             }
         } catch (Exception ex) {
             Logger.getLogger(EmployeeSalary.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jXDatePicker1ActionPerformed
+    }//GEN-LAST:event_DatePickerDateActionPerformed
 
     private void TxtOverTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtOverTimeActionPerformed
         // TODO add your handling code here:
@@ -704,16 +816,65 @@ public class EmployeeSalary extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtLateHoursRateActionPerformed
 
+    private void TxtDesignationKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtDesignationKeyReleased
+        String txt = TxtDesignation.getText();
+        int caretPosition = TxtDesignation.getCaretPosition();
+        if (!txt.matches("^[A-Za-z//]*$")) {
+            TxtDesignation.setText(txt.substring(0, caretPosition - 1) + txt.substring(caretPosition));
+            TxtDesignation.setCaretPosition(caretPosition - 1);
+        }
+    }//GEN-LAST:event_TxtDesignationKeyReleased
+
+    private void jTextFieldEPF1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldEPF1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldEPF1ActionPerformed
+
+    private void jTextFieldEPF2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldEPF2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldEPF2ActionPerformed
+
+    private void TxtETFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtETFActionPerformed
+        
+        
+    }//GEN-LAST:event_TxtETFActionPerformed
+
+    private void ButtonAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonAdd1ActionPerformed
+        InputStream input=getClass().getResourceAsStream("/lk/ijse/payroll/report/paySlip.jasper");
+       HashMap map=new HashMap();
+       try {
+            JasperPrint jasperPrint=JasperFillManager.fillReport(input, map,DBConnection.getInstance().getConnection());
+            JasperViewer.viewReport(jasperPrint);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(EmployeeSalary.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeSalary.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JRException ex) {
+            Logger.getLogger(EmployeeSalary.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_ButtonAdd1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ButtonAdd1;
+    private javax.swing.JButton ButtonPaySlip;
+    private org.jdesktop.swingx.JXDatePicker DatePickerDate;
+    private javax.swing.JTextField TxtBasicSalary;
     private javax.swing.JTextField TxtDesignation;
+    private javax.swing.JTextField TxtEPF;
+    private javax.swing.JTextField TxtETF;
+    private javax.swing.JTextField TxtEmployeeId;
     private javax.swing.JTextField TxtGrossSalary;
-    private javax.swing.JTextField TxtId;
+    private javax.swing.JTextField TxtHouseAllowance;
+    private javax.swing.JTextField TxtInsurance;
     private javax.swing.JTextField TxtLateHoursRate;
+    private javax.swing.JTextField TxtMedical;
+    private javax.swing.JTextField TxtNetSalary;
     private javax.swing.JTextField TxtOverTime;
-    private javax.swing.JTextField TxtSalary;
     private javax.swing.JTextField TxtSalaryId;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField TxtTotalAllowance;
+    private javax.swing.JTextField TxtTotalDeducton;
+    private javax.swing.JTextField TxtVehicleAllowance;
+    private javax.swing.JTextField TxtWelfare;
     private javax.swing.JComboBox<String> jComboBoxEmpName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -721,6 +882,9 @@ public class EmployeeSalary extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -738,6 +902,7 @@ public class EmployeeSalary extends javax.swing.JPanel {
     private javax.swing.JLabel jLabelEmployeeName;
     private javax.swing.JLabel jLabelIncentivesAmount;
     private javax.swing.JLabel jLabelIncentivesAmount1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator11;
@@ -754,21 +919,16 @@ public class EmployeeSalary extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator21;
     private javax.swing.JSeparator jSeparator22;
     private javax.swing.JSeparator jSeparator23;
+    private javax.swing.JSeparator jSeparator25;
+    private javax.swing.JSeparator jSeparator26;
+    private javax.swing.JSeparator jSeparator27;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
-    private javax.swing.JTextField jTextFieldCapitalCost;
-    private javax.swing.JTextField jTextFieldETF;
-    private javax.swing.JTextField jTextFieldHouseRentAllo;
-    private javax.swing.JTextField jTextFieldInsuarance;
-    private javax.swing.JTextField jTextFieldMedical;
-    private javax.swing.JTextField jTextFieldNetSalary;
-    private javax.swing.JTextField jTextFieldTotalDedution;
-    private javax.swing.JTextField jTextFieldTotalIncentives;
-    private javax.swing.JTextField jTextFieldWelfare;
-    private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
+    private javax.swing.JTextField jTextFieldEPF1;
+    private javax.swing.JTextField jTextFieldEPF2;
     // End of variables declaration//GEN-END:variables
 
     private void loadEmployeeName() {
@@ -791,6 +951,47 @@ public class EmployeeSalary extends javax.swing.JPanel {
     private double getLatehoursTot(double rate, int hours) {
        double deductionAmt = rate * hours;
         return deductionAmt;
+    }
+
+   
+//    private void clearTextFields() {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+//
+//    private boolean validation() {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+
+    private void genarateSalaryId() {
+        try {
+            String salaryId;
+            salaryId = IdGenerater.getNewID("salary", "Id", "S");
+            TxtSalaryId.setText(salaryId);
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeSalary.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(EmployeeSalary.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void clearTextFields() {
+        TxtEmployeeId.setText("");
+        TxtDesignation.setText("");
+        TxtETF.setText("");
+        TxtGrossSalary.setText("");
+        TxtHouseAllowance.setText("");
+        TxtLateHoursRate.setText("");
+        TxtMedical.setText("");
+        TxtOverTime.setText("");
+        TxtBasicSalary.setText("");
+        TxtVehicleAllowance.setText("");
+        TxtEPF.setText("");
+        TxtTotalAllowance.setText("");
+        TxtTotalDeducton.setText("");
+        TxtInsurance.setText("");
+        TxtWelfare.setText("");
+        DatePickerDate.setDate(null);
+      
     }
 
     

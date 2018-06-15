@@ -5,10 +5,20 @@
  */
 package lk.ijse.payroll.controller;
 
+import lk.ijse.payroll.business.custom.SalaryBO;
+import lk.ijse.payroll.business.custom.impl.SalaryBOImpl;
+import lk.ijse.payroll.model.SalaryDTO;
+
 /**
  *
  * @author Chamil
  */
-public class EmployeeSalaryController {
+public class EmployeeSalaryController{
+    public static SalaryBO salaryBO=new SalaryBOImpl();
+
+    public static boolean addSalary(SalaryDTO salary)throws Exception{
+        return salaryBO.addSalary(salary);
+    }
+    
     
 }

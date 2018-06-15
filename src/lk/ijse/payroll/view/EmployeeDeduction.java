@@ -34,17 +34,18 @@ public class EmployeeDeduction extends javax.swing.JPanel {
     /** Creates new form Incentives */
     public EmployeeDeduction() {
         initComponents();
-        loadEmployeeId();
-        genarateDeductionId();
-        groupButton();
-        tblView();
-        AutoCompleteDecorator.decorate(jComboBoxEmpName);
         commenMethod();
         
     }
     public void commenMethod(){
         employeeBO = new EmployeeBOImpl();
         dtm=(DefaultTableModel) TblDeduction.getModel();
+        loadEmployeeId();
+        genarateDeductionId();
+        groupButton();
+        tblView();
+        AutoCompleteDecorator.decorate(jComboBoxEmpName);
+        hideTxtField();
     }
 
     /** This method is called from within the constructor to
@@ -170,6 +171,11 @@ public class EmployeeDeduction extends javax.swing.JPanel {
                 TxtInsuarance_PercentageActionPerformed(evt);
             }
         });
+        TxtInsuarance_Percentage.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TxtInsuarance_PercentageKeyReleased(evt);
+            }
+        });
         add(TxtInsuarance_Percentage, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 520, 50, 30));
 
         SeparatorWelfare.setBackground(new java.awt.Color(31, 58, 147));
@@ -185,6 +191,11 @@ public class EmployeeDeduction extends javax.swing.JPanel {
                 TxtWelfare_PercentageActionPerformed(evt);
             }
         });
+        TxtWelfare_Percentage.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TxtWelfare_PercentageKeyReleased(evt);
+            }
+        });
         add(TxtWelfare_Percentage, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 460, 50, 30));
 
         TxtEPF_percentage.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
@@ -193,6 +204,11 @@ public class EmployeeDeduction extends javax.swing.JPanel {
         TxtEPF_percentage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TxtEPF_percentageActionPerformed(evt);
+            }
+        });
+        TxtEPF_percentage.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TxtEPF_percentageKeyReleased(evt);
             }
         });
         add(TxtEPF_percentage, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, 50, 30));
@@ -215,6 +231,11 @@ public class EmployeeDeduction extends javax.swing.JPanel {
                 TxtEPFActionPerformed(evt);
             }
         });
+        TxtEPF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TxtEPFKeyReleased(evt);
+            }
+        });
         add(TxtEPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 400, 150, 30));
 
         TxtWelFare.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
@@ -223,6 +244,11 @@ public class EmployeeDeduction extends javax.swing.JPanel {
         TxtWelFare.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TxtWelFareActionPerformed(evt);
+            }
+        });
+        TxtWelFare.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TxtWelFareKeyReleased(evt);
             }
         });
         add(TxtWelFare, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 460, 150, 30));
@@ -245,6 +271,11 @@ public class EmployeeDeduction extends javax.swing.JPanel {
                 TxtInsuaranceActionPerformed(evt);
             }
         });
+        TxtInsuarance.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TxtInsuaranceKeyReleased(evt);
+            }
+        });
         add(TxtInsuarance, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 520, 150, 30));
 
         jLabel11.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -254,7 +285,7 @@ public class EmployeeDeduction extends javax.swing.JPanel {
 
         jLabel8.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(31, 58, 147));
-        jLabel8.setText("E.P.F");
+        jLabel8.setText("E.P.F      (8%)");
         add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 160, 30));
 
         jLabel12.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
@@ -275,6 +306,11 @@ public class EmployeeDeduction extends javax.swing.JPanel {
                 TxtTotalDeductionActionPerformed(evt);
             }
         });
+        TxtTotalDeduction.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TxtTotalDeductionKeyReleased(evt);
+            }
+        });
         add(TxtTotalDeduction, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 590, 150, 30));
 
         jSeparator10.setBackground(new java.awt.Color(31, 58, 147));
@@ -293,6 +329,11 @@ public class EmployeeDeduction extends javax.swing.JPanel {
         TxtSalary.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TxtSalaryActionPerformed(evt);
+            }
+        });
+        TxtSalary.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TxtSalaryKeyReleased(evt);
             }
         });
         add(TxtSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 200, 150, 30));
@@ -339,6 +380,11 @@ public class EmployeeDeduction extends javax.swing.JPanel {
         TxtDesignation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TxtDesignationActionPerformed(evt);
+            }
+        });
+        TxtDesignation.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TxtDesignationKeyReleased(evt);
             }
         });
         add(TxtDesignation, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, 180, 30));
@@ -546,9 +592,9 @@ public class EmployeeDeduction extends javax.swing.JPanel {
 
     private void jRadioButtonPercentageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPercentageActionPerformed
         if(jRadioButtonPercentage.isSelected()){
-            TxtEPF_percentage.setEnabled(true);
-            TxtWelfare_Percentage.setEnabled(true);
-            TxtInsuarance_Percentage.setEnabled(true);
+            //TxtEPF_percentage.setEnabled(true);
+           // TxtWelfare_Percentage.setEnabled(true);
+            //TxtInsuarance_Percentage.setEnabled(true);
             TxtEPF_percentage.setVisible(true);
             TxtWelfare_Percentage.setVisible(true);
             TxtInsuarance_Percentage.setVisible(true);
@@ -589,6 +635,87 @@ public class EmployeeDeduction extends javax.swing.JPanel {
             Logger.getLogger(EmployeeAllowance.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jComboBoxEmpNameActionPerformed
+
+    private void TxtDesignationKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtDesignationKeyReleased
+        String txt = TxtDesignation.getText();
+        int caretPosition = TxtDesignation.getCaretPosition();
+        if (!txt.matches("^[A-Za-z//]*$")) {
+            TxtDesignation.setText(txt.substring(0, caretPosition - 1) + txt.substring(caretPosition));
+            TxtDesignation.setCaretPosition(caretPosition - 1);
+        }
+    }//GEN-LAST:event_TxtDesignationKeyReleased
+
+    private void TxtSalaryKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtSalaryKeyReleased
+        String txt = TxtSalary.getText();
+        int caretPosition = TxtSalary.getCaretPosition();
+        if (!txt.matches("^[\\d]*")) {
+            TxtSalary.setText(txt.substring(0, caretPosition - 1) + txt.substring(caretPosition));
+            TxtSalary.setCaretPosition(caretPosition - 1);
+        }
+    }//GEN-LAST:event_TxtSalaryKeyReleased
+
+    private void TxtEPF_percentageKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtEPF_percentageKeyReleased
+        String txt = TxtEPF_percentage.getText();
+        int caretPosition = TxtEPF_percentage.getCaretPosition();
+        if (!txt.matches("^[\\d]*")) {
+            TxtEPF_percentage.setText(txt.substring(0, caretPosition - 1) + txt.substring(caretPosition));
+            TxtEPF_percentage.setCaretPosition(caretPosition - 1);
+        }
+    }//GEN-LAST:event_TxtEPF_percentageKeyReleased
+
+    private void TxtWelfare_PercentageKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtWelfare_PercentageKeyReleased
+        String txt = TxtWelfare_Percentage.getText();
+        int caretPosition = TxtWelfare_Percentage.getCaretPosition();
+        if (!txt.matches("^[\\d]*")) {
+            TxtWelfare_Percentage.setText(txt.substring(0, caretPosition - 1) + txt.substring(caretPosition));
+            TxtWelfare_Percentage.setCaretPosition(caretPosition - 1);
+        }
+    }//GEN-LAST:event_TxtWelfare_PercentageKeyReleased
+
+    private void TxtInsuarance_PercentageKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtInsuarance_PercentageKeyReleased
+        String txt = TxtInsuarance_Percentage.getText();
+        int caretPosition = TxtInsuarance_Percentage.getCaretPosition();
+        if (!txt.matches("^[\\d]*")) {
+            TxtInsuarance_Percentage.setText(txt.substring(0, caretPosition - 1) + txt.substring(caretPosition));
+            TxtInsuarance_Percentage.setCaretPosition(caretPosition - 1);
+        }
+    }//GEN-LAST:event_TxtInsuarance_PercentageKeyReleased
+
+    private void TxtEPFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtEPFKeyReleased
+        String txt = TxtEPF.getText();
+        int caretPosition = TxtEPF.getCaretPosition();
+        if (!txt.matches("^[\\d]*")) {
+            TxtEPF.setText(txt.substring(0, caretPosition - 1) + txt.substring(caretPosition));
+            TxtEPF.setCaretPosition(caretPosition - 1);
+        }
+    }//GEN-LAST:event_TxtEPFKeyReleased
+
+    private void TxtWelFareKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtWelFareKeyReleased
+        String txt = TxtWelFare.getText();
+        int caretPosition = TxtWelFare.getCaretPosition();
+        if (!txt.matches("^[\\d]*")) {
+            TxtWelFare.setText(txt.substring(0, caretPosition - 1) + txt.substring(caretPosition));
+            TxtWelFare.setCaretPosition(caretPosition - 1);
+        }
+    }//GEN-LAST:event_TxtWelFareKeyReleased
+
+    private void TxtInsuaranceKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtInsuaranceKeyReleased
+        String txt = TxtInsuarance.getText();
+        int caretPosition = TxtInsuarance.getCaretPosition();
+        if (!txt.matches("^[\\d]*")) {
+            TxtInsuarance.setText(txt.substring(0, caretPosition - 1) + txt.substring(caretPosition));
+            TxtInsuarance.setCaretPosition(caretPosition - 1);
+        }
+    }//GEN-LAST:event_TxtInsuaranceKeyReleased
+
+    private void TxtTotalDeductionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtTotalDeductionKeyReleased
+        String txt = TxtTotalDeduction.getText();
+        int caretPosition = TxtTotalDeduction.getCaretPosition();
+        if (!txt.matches("^[\\d]*")) {
+            TxtTotalDeduction.setText(txt.substring(0, caretPosition - 1) + txt.substring(caretPosition));
+            TxtTotalDeduction.setCaretPosition(caretPosition - 1);
+        }
+    }//GEN-LAST:event_TxtTotalDeductionKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -713,6 +840,16 @@ public class EmployeeDeduction extends javax.swing.JPanel {
     private double getLhTot(double rate, int hours) {
        double desuctionAmt = rate * hours;
         return desuctionAmt;
+    }
+
+    private void hideTxtField() {
+        TxtEPF_percentage.setVisible(false);
+        TxtWelfare_Percentage.setVisible(false);
+        TxtInsuarance_Percentage.setVisible(false);
+        SeparatorEPF.setVisible(false);
+        SeparatorWelfare.setVisible(false);
+        SeparatorInsurance.setVisible(false);
+        
     }
 
 }

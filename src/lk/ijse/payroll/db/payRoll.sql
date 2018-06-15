@@ -25,7 +25,7 @@ CREATE TABLE Employee(
 	Address varchar(30),
 	ContactNo int(10),
 	JoinDate DATE,
-	DOB DATE,
+	DOB varchar,
 	Gender varchar(6),
 	LateHoursRate decimal(10,2), 
 	OtHoursRate decimal(10,2), 

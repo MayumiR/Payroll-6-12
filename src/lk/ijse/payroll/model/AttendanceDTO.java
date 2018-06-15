@@ -12,7 +12,7 @@ package lk.ijse.payroll.model;
 public class AttendanceDTO {
     private String attendanceId;
     private String employeeId;
-    private String dayStatus;//leave - 0 , precent - 1 
+    private int dayStatus;//leave - 0 , precent - 1 
     private String dayType;//Halfday,Fullday
     private String date;
     private int OThrs,lateHrs;
@@ -22,7 +22,7 @@ public class AttendanceDTO {
     public AttendanceDTO() {
     }
 
-    public AttendanceDTO(String attendanceId, String employeeId, String dayStatus, String dayType, String date, int OThrs, int lateHrs, String inTime, String outTime) {
+    public AttendanceDTO(String attendanceId, String employeeId, int dayStatus, String dayType, String date, int OThrs, int lateHrs, String inTime, String outTime) {
         this.attendanceId = attendanceId;
         this.employeeId = employeeId;
         this.dayStatus = dayStatus;
@@ -65,14 +65,14 @@ public class AttendanceDTO {
     /**
      * @return the dayStatus
      */
-    public String getDayStatus() {
+    public int getDayStatus() {
         return dayStatus;
     }
 
     /**
      * @param dayStatus the dayStatus to set
      */
-    public void setDayStatus(String dayStatus) {
+    public void setDayStatus(int dayStatus) {
         this.dayStatus = dayStatus;
     }
 
@@ -159,12 +159,6 @@ public class AttendanceDTO {
     public void setOutTime(String outTime) {
         this.outTime = outTime;
     }
-
-    @Override
-    public String toString() {
-        return "AttendanceDTO{" + "attendanceId=" + attendanceId + ", employeeId=" + employeeId + ", dayStatus=" + dayStatus + ", dayType=" + dayType + ", date=" + date + ", OThrs=" + OThrs + ", lateHrs=" + lateHrs + ", inTime=" + inTime + ", outTime=" + outTime + '}';
-    }
-   
 
     
 }

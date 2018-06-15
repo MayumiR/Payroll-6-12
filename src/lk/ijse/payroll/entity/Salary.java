@@ -12,12 +12,14 @@ package lk.ijse.payroll.entity;
 public class Salary {
     private String id;
     private String employeeId;
+    private String date;
     private double hraAmount;
     private double vaAmount;
     private double medicalAmount;
     private double otAmount;
     private double totalAllowanceAmount;
     private double epfAmount;
+    private double etfAmount;
     private double welfareAmount;
     private double insuranceAmount;
     private double lateHoursAmount;
@@ -29,15 +31,17 @@ public class Salary {
     public Salary() {
     }
 
-    public Salary(String id, String employeeId, double hraAmount, double vaAmount, double medicalAmount, double otAmount, double totalAllowanceAmount, double epfAmount, double welfareAmount, double insuranceAmount, double lateHoursAmount, double totalDeductionAmount, double grossSalary, double netSalary, double basicSalary) {
+    public Salary(String id, String employeeId, String date, double hraAmount, double vaAmount, double medicalAmount, double otAmount, double totalAllowanceAmount, double epfAmount, double etfAmount, double welfareAmount, double insuranceAmount, double lateHoursAmount, double totalDeductionAmount, double grossSalary, double netSalary, double basicSalary) {
         this.id = id;
         this.employeeId = employeeId;
+        this.date = date;
         this.hraAmount = hraAmount;
         this.vaAmount = vaAmount;
         this.medicalAmount = medicalAmount;
         this.otAmount = otAmount;
         this.totalAllowanceAmount = totalAllowanceAmount;
         this.epfAmount = epfAmount;
+        this.etfAmount = etfAmount;
         this.welfareAmount = welfareAmount;
         this.insuranceAmount = insuranceAmount;
         this.lateHoursAmount = lateHoursAmount;
@@ -46,7 +50,7 @@ public class Salary {
         this.netSalary = netSalary;
         this.basicSalary = basicSalary;
     }
-    
+
     /**
      * @return the id
      */
@@ -73,6 +77,20 @@ public class Salary {
      */
     public void setEmployeeId(String employeeId) {
         this.employeeId = employeeId;
+    }
+
+    /**
+     * @return the date
+     */
+    public String getDate() {
+        return date;
+    }
+
+    /**
+     * @param date the date to set
+     */
+    public void setDate(String date) {
+        this.date = date;
     }
 
     /**
@@ -157,6 +175,20 @@ public class Salary {
      */
     public void setEpfAmount(double epfAmount) {
         this.epfAmount = epfAmount;
+    }
+
+    /**
+     * @return the etfAmount
+     */
+    public double getEtfAmount() {
+        return etfAmount;
+    }
+
+    /**
+     * @param etfAmount the etfAmount to set
+     */
+    public void setEtfAmount(double etfAmount) {
+        this.etfAmount = etfAmount;
     }
 
     /**
@@ -259,9 +291,8 @@ public class Salary {
 
     @Override
     public String toString() {
-        return "Salary{" + "id=" + id + ", employeeId=" + employeeId + ", hraAmount=" + hraAmount + ", vaAmount=" + vaAmount + ", medicalAmount=" + medicalAmount + ", otAmount=" + otAmount + ", totalAllowanceAmount=" + totalAllowanceAmount + ", epfAmount=" + epfAmount + ", welfareAmount=" + welfareAmount + ", insuranceAmount=" + insuranceAmount + ", lateHoursAmount=" + lateHoursAmount + ", totalDeductionAmount=" + totalDeductionAmount + ", grossSalary=" + grossSalary + ", netSalary=" + netSalary + ", basicSalary=" + basicSalary + '}';
+        return "Salary{" + "id=" + id + ", employeeId=" + employeeId + ", date=" + date + ", hraAmount=" + hraAmount + ", vaAmount=" + vaAmount + ", medicalAmount=" + medicalAmount + ", otAmount=" + otAmount + ", totalAllowanceAmount=" + totalAllowanceAmount + ", epfAmount=" + epfAmount + ", etfAmount=" + etfAmount + ", welfareAmount=" + welfareAmount + ", insuranceAmount=" + insuranceAmount + ", lateHoursAmount=" + lateHoursAmount + ", totalDeductionAmount=" + totalDeductionAmount + ", grossSalary=" + grossSalary + ", netSalary=" + netSalary + ", basicSalary=" + basicSalary + '}';
     }
-    
-    
+
     
 }

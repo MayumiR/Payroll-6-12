@@ -45,16 +45,15 @@ public  class AttendanceDAOImpl implements AttendanceDAO{
 
     @Override
     public Attendance search(String id) throws Exception {
-    ResultSet rst = CrudUtil.executeQuery("Select count(Id) as allAttendance, count(DayStatus) From Attendance where DayStatus= '1' and EmpId = ? and " +
+    ResultSet rst = CrudUtil.executeQuery("Select count(Id) as allAttendance, count(DayStatus) From Attendance where EmployeeId = ? and " +
                 " MONTH(date) = MONTH(CURRENT_DATE()) " +
                 " and YEAR(date) = YEAR(CURRENT_DATE())",id );
       
       Attendance atndnce = new Attendance();
-      if (rst.next()) {
-          
-          atndnce.setLeaveCount(rst.getInt(1) - rst.getInt(2));
-          atndnce.setPresentCount(rst.getInt(2));
-            return atndnce;
+        if (rst.next()) {
+        atndnce.setLeaveCount(rst.getInt(1) - rst.getInt(2));
+        atndnce.setPresentCount(rst.getInt(2));
+           return atndnce;
         } else {
             return null;
         } 

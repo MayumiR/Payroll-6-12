@@ -39,7 +39,6 @@ public class Home extends javax.swing.JFrame {
         jLabelDeduction = new javax.swing.JLabel();
         LblReport = new javax.swing.JLabel();
         lblLoan = new javax.swing.JLabel();
-        LblAttendance = new javax.swing.JLabel();
         AllLoadpnl = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -68,7 +67,7 @@ public class Home extends javax.swing.JFrame {
                 jLabelSalaryMouseExited(evt);
             }
         });
-        jPanel1.add(jLabelSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 650, 190, 50));
+        jPanel1.add(jLabelSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 590, 190, 50));
 
         jLabelHome.setBackground(new java.awt.Color(31, 58, 147));
         jLabelHome.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 16)); // NOI18N
@@ -145,7 +144,7 @@ public class Home extends javax.swing.JFrame {
                 jLabelAllowanceMouseExited(evt);
             }
         });
-        jPanel1.add(jLabelAllowance, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, 190, -1));
+        jPanel1.add(jLabelAllowance, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 190, -1));
 
         jLabelDeduction.setBackground(new java.awt.Color(31, 58, 147));
         jLabelDeduction.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 16)); // NOI18N
@@ -165,7 +164,7 @@ public class Home extends javax.swing.JFrame {
                 jLabelDeductionMouseExited(evt);
             }
         });
-        jPanel1.add(jLabelDeduction, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, 190, -1));
+        jPanel1.add(jLabelDeduction, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, 190, -1));
 
         LblReport.setBackground(new java.awt.Color(31, 58, 147));
         LblReport.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 16)); // NOI18N
@@ -184,7 +183,7 @@ public class Home extends javax.swing.JFrame {
                 LblReportMouseExited(evt);
             }
         });
-        jPanel1.add(LblReport, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 720, 190, -1));
+        jPanel1.add(LblReport, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 660, 190, -1));
 
         lblLoan.setBackground(new java.awt.Color(31, 58, 147));
         lblLoan.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 16)); // NOI18N
@@ -204,26 +203,7 @@ public class Home extends javax.swing.JFrame {
                 lblLoanMouseExited(evt);
             }
         });
-        jPanel1.add(lblLoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 580, 190, -1));
-
-        LblAttendance.setBackground(new java.awt.Color(31, 58, 147));
-        LblAttendance.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 16)); // NOI18N
-        LblAttendance.setForeground(new java.awt.Color(255, 255, 255));
-        LblAttendance.setText("   Attendance");
-        LblAttendance.setOpaque(true);
-        LblAttendance.setPreferredSize(new java.awt.Dimension(210, 50));
-        LblAttendance.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                LblAttendanceMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                LblAttendanceMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                LblAttendanceMouseExited(evt);
-            }
-        });
-        jPanel1.add(LblAttendance, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 190, 50));
+        jPanel1.add(lblLoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 510, 190, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 790));
 
@@ -389,24 +369,6 @@ public class Home extends javax.swing.JFrame {
         
     }//GEN-LAST:event_lblLoanMouseClicked
 
-    private void LblAttendanceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LblAttendanceMouseClicked
-//        Attendance attendance=new Attendance();
-//        AllLoadpnl.removeAll();
-//        attendance.setSize(AllLoadpnl.getSize());
-//        attendance.setVisible(true);
-//        AllLoadpnl.add(attendance);
-//        AllLoadpnl.revalidate();
-//        AllLoadpnl.repaint();
-    }//GEN-LAST:event_LblAttendanceMouseClicked
-
-    private void LblAttendanceMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LblAttendanceMouseEntered
-        LblAttendance.setBackground(new java.awt.Color(58, 83, 155));
-    }//GEN-LAST:event_LblAttendanceMouseEntered
-
-    private void LblAttendanceMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LblAttendanceMouseExited
-        LblAttendance.setBackground(new java.awt.Color(31, 58, 147));
-    }//GEN-LAST:event_LblAttendanceMouseExited
-
     /**
      * @param args the command line arguments
      */
@@ -439,7 +401,6 @@ public class Home extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AllLoadpnl;
-    private javax.swing.JLabel LblAttendance;
     private javax.swing.JLabel LblReport;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelAllowance;

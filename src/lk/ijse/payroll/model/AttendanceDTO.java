@@ -19,6 +19,9 @@ public class AttendanceDTO {
     private String inTime;
     private String outTime;
 
+    private int leaveCount;
+    private int presentCount;
+
     public AttendanceDTO() {
     }
 
@@ -32,6 +35,22 @@ public class AttendanceDTO {
         this.lateHrs = lateHrs;
         this.inTime = inTime;
         this.outTime = outTime;
+    }
+
+    public int getLeaveCount() {
+        return leaveCount;
+    }
+
+    public void setLeaveCount(int leaveCount) {
+        this.leaveCount = leaveCount;
+    }
+
+    public int getPresentCount() {
+        return presentCount;
+    }
+
+    public void setPresentCount(int presentCount) {
+        this.presentCount = presentCount;
     }
 
     /**

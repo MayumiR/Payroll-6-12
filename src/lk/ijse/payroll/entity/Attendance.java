@@ -18,18 +18,13 @@ public class Attendance {
     private int OThrs,lateHrs;
     private String inTime;
     private String outTime;
-    private int count;
+
+    private int leaveCount;
+    private int presentCount;
     
     public Attendance() {
     }
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-   
+ 
 
     public Attendance(String attendanceId, String employeeId, int dayStatus, String dayType, String date, int OThrs, int lateHrs, String inTime, String outTime) {
         this.attendanceId = attendanceId;
@@ -41,6 +36,23 @@ public class Attendance {
         this.lateHrs = lateHrs;
         this.inTime = inTime;
         this.outTime = outTime;
+    }
+
+    public int getPresentCount() {
+        return presentCount;
+    }
+
+    public void setPresentCount(int presentCount) {
+        this.presentCount = presentCount;
+    }
+    
+    
+  public int getLeaveCount() {
+        return leaveCount;
+    }
+
+    public void setLeaveCount(int leaveCount) {
+        this.leaveCount = leaveCount;
     }
 
     /**

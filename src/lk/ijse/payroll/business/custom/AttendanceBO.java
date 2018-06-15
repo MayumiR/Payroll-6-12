@@ -22,6 +22,7 @@ public interface AttendanceBO extends SuperBO{
 
     public ArrayList<AttendanceDTO> getAllAttendance();
     public ArrayList<AttendanceDTO> getEmployeeAttendanceById(String id) throws Exception;
+    public AttendanceDTO getAttendanceCount(String id) throws Exception;
     
     
 }

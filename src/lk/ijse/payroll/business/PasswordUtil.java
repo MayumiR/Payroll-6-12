@@ -9,7 +9,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Arrays;
-import java.util.Base64;
+//import java.util.Base64;
 import java.util.Random;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -49,7 +49,7 @@ public class PasswordUtil {
         String returnValue = null;
         byte[] securePassword = hash(password.toCharArray(), salt.getBytes());
 
-        returnValue = Base64.getEncoder().encodeToString(securePassword);
+        //returnValue = Base64.getEncoder().encodeToString(securePassword);
 
         return returnValue;
     }

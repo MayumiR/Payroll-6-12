@@ -434,6 +434,8 @@ public class EmployeeAttendance extends javax.swing.JPanel {
 
     private void BtnAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAdd1ActionPerformed
         // TODO add your handling code here:
+        RadioButtonLeave.setEnabled(true);
+        RadioButtonPrasent.setEnabled(true);
     }//GEN-LAST:event_BtnAdd1ActionPerformed
 
     private void RadioButtonPrasentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioButtonPrasentActionPerformed
@@ -474,7 +476,7 @@ public class EmployeeAttendance extends javax.swing.JPanel {
                 TxtEmployeeId.setText(employee.getId());
                 TxtDesignation.setText(employee.getDesignation());
                  AttendanceDTO attendanceDTO =EmployeeAttendanceController.getAttendanceCount(employee.getId());
-                 TxtLeaveDays.setText(""+attendanceDTO.getLeaveCount());
+                 TxtLeaveDays.setText(""+(attendanceDTO.getLeaveCount()-attendanceDTO.getPresentCount()));
                  TxtPresentDays.setText(""+attendanceDTO.getPresentCount());
             }
         } catch (Exception ex) {

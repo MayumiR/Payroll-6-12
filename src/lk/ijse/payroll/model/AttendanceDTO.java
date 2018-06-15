@@ -18,7 +18,15 @@ public class AttendanceDTO {
     private int OThrs,lateHrs;
     private String inTime;
     private String outTime;
+    private int count;
 
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
     public AttendanceDTO() {
     }
 

@@ -19,7 +19,8 @@ public class Attendance {
     private String inTime;
     private String outTime;
   private int count;
-
+ public Attendance() {
+    }
     public int getCount() {
         return count;
     }
@@ -27,8 +28,7 @@ public class Attendance {
     public void setCount(int count) {
         this.count = count;
     }
-    public Attendance() {
-    }
+   
 
     public Attendance(String attendanceId, String employeeId, int dayStatus, String dayType, String date, int OThrs, int lateHrs, String inTime, String outTime) {
         this.attendanceId = attendanceId;

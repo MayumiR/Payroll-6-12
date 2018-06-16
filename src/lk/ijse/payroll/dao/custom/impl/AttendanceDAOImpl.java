@@ -104,14 +104,45 @@ public  class AttendanceDAOImpl implements AttendanceDAO{
     }
 
     @Override
-    public ArrayList<Attendance> getAllByIDandDate(String id, String date) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<Attendance> searchByIdAndDate(String id, String date) throws Exception {
+       ArrayList<Attendance> allAttendance = new ArrayList<>();
+        ResultSet rst = CrudUtil.executeQuery("SELECT * FROM Attendance where EmployeeId=? and "
++ " date = '"+date+"'",id );
+        while (rst.next()) {
+            allAttendance.add(new Attendance(
+                    rst.getString(1),
+                    rst.getString(2),
+                    rst.getInt(3),
+                    rst.getString(4),
+                    rst.getString(5),
+                    rst.getInt(6),
+                    rst.getInt(7),
+                    rst.getString(8),
+                    rst.getString(9)
+                    ));
+        }
+        return allAttendance; 
     }
 
-  
-
-   
-
-
-    
+    @Override
+    public ArrayList<Attendance> getAllByIDandDate(String id, String date) throws Exception {
+        ArrayList<Attendance> allAttendance = new ArrayList<>();
+        ResultSet rst = CrudUtil.executeQuery("SELECT * FROM Attendance where EmployeeId=? and "
++ " date = '"+date+"'",id );
+        while (rst.next()) {
+            allAttendance.add(new Attendance(
+                    rst.getString(1),
+                    rst.getString(2),
+                    rst.getInt(3),
+                    rst.getString(4),
+                    rst.getString(5),
+                    rst.getInt(6),
+                    rst.getInt(7),
+                    rst.getString(8),
+                    rst.getString(9)
+                    ));
+        }
+        return allAttendance;
+    }
 }
+    

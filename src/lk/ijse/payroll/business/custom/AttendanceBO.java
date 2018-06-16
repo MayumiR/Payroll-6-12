@@ -18,11 +18,11 @@ public interface AttendanceBO extends SuperBO{
 
     
     
-     public boolean addAttendance(AttendanceDTO attendance) throws Exception;
-
-    public ArrayList<AttendanceDTO> getAllAttendance();
+    public boolean addAttendance(AttendanceDTO attendance) throws Exception;
+    public ArrayList<AttendanceDTO> getAllAttendance()throws Exception;
     public ArrayList<AttendanceDTO> getEmployeeAttendanceById(String id) throws Exception;
     public AttendanceDTO getAttendanceCount(String id) throws Exception;
+    public ArrayList<AttendanceDTO> getAttendanceByIdAndDate(String id,String date)throws Exception;
     
     
 }

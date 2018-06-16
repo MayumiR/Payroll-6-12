@@ -5,6 +5,7 @@
  */
 package lk.ijse.payroll.dao.custom;
 
+import java.util.ArrayList;
 import lk.ijse.payroll.dao.CrudDAO;
 import lk.ijse.payroll.entity.Attendance;
 
@@ -14,4 +15,5 @@ import lk.ijse.payroll.entity.Attendance;
  */
 public interface AttendanceDAO extends CrudDAO<Attendance,String>{
        public Attendance search(String id) throws Exception;
+       public ArrayList<Attendance> searchByIdAndDate(String id,String date) throws Exception;
 }

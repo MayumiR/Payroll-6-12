@@ -29,14 +29,16 @@ public class EmployeeAttendanceController {
         return attendanceBO.addAttendance(attendance);
     }
 
-    public static ArrayList<AttendanceDTO> getAttendance() {
+    public static ArrayList<AttendanceDTO> getAttendance() throws Exception {
         return attendanceBO.getAllAttendance();
     }
 
    public static ArrayList<AttendanceDTO> getAttendanceById(String id) throws Exception {
         return attendanceBO.getEmployeeAttendanceById(id);
     }
-
+ public static ArrayList<AttendanceDTO> getAttendanceByIdAndDate(String id,String date) throws Exception {
+        return attendanceBO.getAttendanceByIdAndDate(id, date);
+    }
     
 }
 

@@ -103,5 +103,31 @@ public class AttendanceBOImpl implements AttendanceBO{
         return attendanceDTO;
     }
 
+    @Override
+    public ArrayList<AttendanceDTO> getAttendanceByIdAndDate(String id, String date) throws Exception {
+       try {
+            ArrayList<Attendance> attendances= attendanceDAO.getAllByIDandDate(id, date);
+            ArrayList<AttendanceDTO> dtos = new ArrayList<>();
+            for (Attendance attendance : attendances) {
+                dtos.add(new AttendanceDTO(
+                        attendance.getAttendanceId(),
+                        attendance.getEmployeeId(),
+                        attendance.getDayStatus(),
+                        attendance.getDayType(),
+                        attendance.getDate(),
+                        attendance.getOThrs(),
+                        attendance.getLateHrs(),
+                        attendance.getInTime(),
+                        attendance.getOutTime()
+                        
+                ));
+            }
+            return dtos;
+        } catch (Exception ex) {
+            Logger.getLogger(AttendanceBOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
    
     }

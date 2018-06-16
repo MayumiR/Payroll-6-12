@@ -434,8 +434,16 @@ public class EmployeeAttendance extends javax.swing.JPanel {
 
     private void BtnAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAdd1ActionPerformed
         // TODO add your handling code here:
+        
+        
         RadioButtonLeave.setEnabled(true);
         RadioButtonPrasent.setEnabled(true);
+        if(RadioButtonLeave.isSelected()){
+            RadioButtonLeave.setSelected(false);
+        }else if(RadioButtonPrasent.isSelected()){
+           RadioButtonPrasent.setSelected(false); 
+        }
+        
     }//GEN-LAST:event_BtnAdd1ActionPerformed
 
     private void RadioButtonPrasentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioButtonPrasentActionPerformed
@@ -467,6 +475,8 @@ public class EmployeeAttendance extends javax.swing.JPanel {
     }//GEN-LAST:event_TxtEmployeeIdActionPerformed
 
     private void jComboBoxEmpNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEmpNameActionPerformed
+         AttendanceDTO attendanceDTO;
+         ArrayList<AttendanceDTO> attendanceList;
         employeeName = jComboBoxEmpName.getSelectedItem().toString();
         try {
             String empoyeeName=(String) jComboBoxEmpName.getSelectedItem();
@@ -475,7 +485,31 @@ public class EmployeeAttendance extends javax.swing.JPanel {
             if(employee!=null){
                 TxtEmployeeId.setText(employee.getId());
                 TxtDesignation.setText(employee.getDesignation());
-                 AttendanceDTO attendanceDTO =EmployeeAttendanceController.getAttendanceCount(employee.getId());
+                 attendanceDTO =EmployeeAttendanceController.getAttendanceCount(employee.getId());
+                 attendanceList = EmployeeAttendanceController.getAttendanceByIdAndDate(employee.getId(), DateLbl.getText());
+                 System.out.println("Today Attendance>> of "+employeeName+"-"+attendanceList.size());
+                 if(attendanceList.size()>0){
+                     AttendanceDTO attendanceInDatabase = attendanceList.get(0);
+                    if(attendanceInDatabase.getDayType().equals("FullDay")){
+                        CheckBoxHalf.setSelected(false);
+                        CheckBoxHalf.setEnabled(false);
+                    }else{
+                        CheckBoxHalf.setEnabled(true);
+                         CheckBoxHalf.setSelected(true); 
+                         
+                    }
+                    InTimeLbl.setText(attendanceInDatabase.getDate());
+                    OthTxt.setText(""+attendanceInDatabase.getOThrs());
+                    LtTxt.setText(""+attendanceInDatabase.getLateHrs());
+                    RadioButtonPrasent.setSelected(true);
+                     RadioButtonLeave.setEnabled(false);
+                     InTimeLbl.setEnabled(false);
+                     ToggleButtonInTime.setEnabled(false);
+                 }else{
+                      RadioButtonLeave.setEnabled(true);
+                     InTimeLbl.setEnabled(true);
+                     ToggleButtonInTime.setEnabled(true); 
+                 }
                  TxtLeaveDays.setText(""+(attendanceDTO.getLeaveCount()-attendanceDTO.getPresentCount()));
                  TxtPresentDays.setText(""+attendanceDTO.getPresentCount());
             }
@@ -784,7 +818,8 @@ public class EmployeeAttendance extends javax.swing.JPanel {
                     } else {
                         day_name = "Saturday";
                     }
-                    String dateset = year + "/" + month + "/" + day + " " + day_name + "";
+                    //String dateset = year + "/" + month + "/" + day + " " + day_name + "";
+                    String dateset = year + "-" + month + "-" + day+"";
                     String timeset = hour + ":" + minutes + ":" + second + ":" + daynight;
 
                     String dateAndTime =  dateset;

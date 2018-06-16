@@ -50,7 +50,7 @@ public class AllowanceReport extends javax.swing.JFrame {
         jLabelBasicSalary = new javax.swing.JLabel();
         jSeparator22 = new javax.swing.JSeparator();
         TxtEmployeeId = new javax.swing.JTextField();
-        ComboBoxEmpName = new javax.swing.JComboBox<>();
+        ComboBoxEmpName = new javax.swing.JComboBox<String>();
         BtnView = new javax.swing.JButton();
         BtnCancel = new javax.swing.JButton();
         TextFieldDateOfBirth = new com.toedter.calendar.JDateChooser();

@@ -451,6 +451,9 @@ public class EmployeeAttendance extends javax.swing.JPanel {
         dayType = "FullDay";
         if(RadioButtonPrasent.isSelected()){
             RadioButtonLeave.setEnabled(false);
+            CheckBoxHalf.setEnabled(true);
+            ToggleButtonInTime.setEnabled(true);
+            ToggleButtonOutTime.setEnabled(true);
         }else{
             RadioButtonLeave.setEnabled(true);
         }
@@ -461,6 +464,11 @@ public class EmployeeAttendance extends javax.swing.JPanel {
         dayType = "FullDay";
         if(RadioButtonLeave.isSelected()){
             RadioButtonPrasent.setEnabled(false);
+            CheckBoxHalf.setEnabled(false);
+            InTimeLbl.setText("00:00:00");
+            OutTimeLbl.setText("00:00:00");
+            ToggleButtonInTime.setEnabled(false);
+            ToggleButtonOutTime.setEnabled(false);
         }else{
             RadioButtonPrasent.setEnabled(false);
         }
@@ -489,6 +497,7 @@ public class EmployeeAttendance extends javax.swing.JPanel {
                  attendanceList = EmployeeAttendanceController.getAttendanceByIdAndDate(employee.getId(), DateLbl.getText());
                  System.out.println("Today Attendance>> of "+employeeName+"-"+attendanceList.size());
                  if(attendanceList.size()>0){
+                     BtnAdd.setText("Update");
                      AttendanceDTO attendanceInDatabase = attendanceList.get(0);
                     if(attendanceInDatabase.getDayType().equals("FullDay")){
                         CheckBoxHalf.setSelected(false);
@@ -498,7 +507,7 @@ public class EmployeeAttendance extends javax.swing.JPanel {
                          CheckBoxHalf.setSelected(true); 
                          
                     }
-                    InTimeLbl.setText(attendanceInDatabase.getDate());
+                    InTimeLbl.setText(attendanceInDatabase.getInTime());
                     OthTxt.setText(""+attendanceInDatabase.getOThrs());
                     LtTxt.setText(""+attendanceInDatabase.getLateHrs());
                     RadioButtonPrasent.setSelected(true);
@@ -506,10 +515,12 @@ public class EmployeeAttendance extends javax.swing.JPanel {
                      InTimeLbl.setEnabled(false);
                      ToggleButtonInTime.setEnabled(false);
                  }else{
-                      RadioButtonLeave.setEnabled(true);
+                     BtnAdd.setText("Add");
+                     RadioButtonLeave.setEnabled(true);
                      InTimeLbl.setEnabled(true);
                      ToggleButtonInTime.setEnabled(true); 
                  }
+                 
                  TxtLeaveDays.setText(""+(attendanceDTO.getLeaveCount()-attendanceDTO.getPresentCount()));
                  TxtPresentDays.setText(""+attendanceDTO.getPresentCount());
             }

@@ -24,7 +24,12 @@ public class AttendanceDTO {
 
     public AttendanceDTO() {
     }
-
+   public AttendanceDTO(String attendanceId,int dayStatus, String dayType,String outTime) {
+             this.attendanceId = attendanceId;
+      this.dayStatus = dayStatus;
+        this.dayType = dayType;
+          this.outTime = outTime;
+    }
     public AttendanceDTO(String attendanceId, String employeeId, int dayStatus, String dayType, String date, int OThrs, int lateHrs, String inTime, String outTime) {
         this.attendanceId = attendanceId;
         this.employeeId = employeeId;

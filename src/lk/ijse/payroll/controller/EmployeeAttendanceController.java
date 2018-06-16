@@ -29,6 +29,9 @@ public class EmployeeAttendanceController {
         return attendanceBO.addAttendance(attendance);
     }
 
+      public static boolean UpdateAttendance(AttendanceDTO attendance) throws Exception{
+        return attendanceBO.updateAttendance(attendance);
+    }
     public static ArrayList<AttendanceDTO> getAttendance() throws Exception {
         return attendanceBO.getAllAttendance();
     }

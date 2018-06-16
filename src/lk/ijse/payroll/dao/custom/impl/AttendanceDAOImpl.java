@@ -19,7 +19,7 @@ public  class AttendanceDAOImpl implements AttendanceDAO{
 
     @Override
     public boolean add(Attendance entity) throws Exception {
-           return CrudUtil.executeUpdate("INSERT INTO Attendance VALUES (?,?,?,?,?,?,?,?,?) ",
+           return CrudUtil.executeUpdate("Replace INTO Attendance VALUES (?,?,?,?,?,?,?,?,?) ",
                 entity.getAttendanceId(),
                 entity.getEmployeeId(),
                 entity.getDayStatus(),
@@ -35,7 +35,10 @@ public  class AttendanceDAOImpl implements AttendanceDAO{
 
     @Override
     public boolean update(Attendance entity) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         return CrudUtil.executeUpdate("UPDATE Attendance SET DayStatus=?, DayType=?, OutTime=? WHERE Id=?", 
+                entity.getDayStatus(),
+                entity.getDayType(),
+                  entity.getOutTime(),entity.getAttendanceId()) > 0;
     }
 
     @Override

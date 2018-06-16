@@ -24,7 +24,12 @@ public class Attendance {
     
     public Attendance() {
     }
- 
+  public Attendance(String attendanceId,int dayStatus, String dayType,String outTime) {
+             this.attendanceId = attendanceId;
+      this.dayStatus = dayStatus;
+        this.dayType = dayType;
+          this.outTime = outTime;
+    }
 
     public Attendance(String attendanceId, String employeeId, int dayStatus, String dayType, String date, int OThrs, int lateHrs, String inTime, String outTime) {
         this.attendanceId = attendanceId;

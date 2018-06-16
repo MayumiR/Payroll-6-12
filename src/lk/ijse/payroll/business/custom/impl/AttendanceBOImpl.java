@@ -129,5 +129,15 @@ public class AttendanceBOImpl implements AttendanceBO{
         return null;
     }
 
-   
+    @Override
+    public boolean updateAttendance(AttendanceDTO attendance) throws Exception {
+          return  attendanceDAO.update(new Attendance(
+                attendance.getAttendanceId(),
+                attendance.getDayStatus(),
+                attendance.getDayType(),
+                attendance.getOutTime()
+
+        )); 
     }
+
+}

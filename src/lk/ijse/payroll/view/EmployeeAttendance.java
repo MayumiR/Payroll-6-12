@@ -722,7 +722,7 @@ public class EmployeeAttendance extends javax.swing.JPanel {
                 while (timeRun == 0) {
 
                     Calendar calendar = new GregorianCalendar();
-                    int hour = calendar.get(Calendar.HOUR) + 12;
+                    int hour = calendar.get(Calendar.HOUR);
                     int minutes = calendar.get(Calendar.MINUTE);
                     int second = calendar.get(Calendar.SECOND);
                     int ampm = calendar.get(Calendar.AM_PM);
@@ -757,7 +757,7 @@ public class EmployeeAttendance extends javax.swing.JPanel {
                 while (timeRun == 0) {
 
                     Calendar calendar = new GregorianCalendar();
-                    int hour = calendar.get(Calendar.HOUR) + 12;
+                    int hour = calendar.get(Calendar.HOUR);
                     int minutes = calendar.get(Calendar.MINUTE);
                     int second = calendar.get(Calendar.SECOND);
                     int ampm = calendar.get(Calendar.AM_PM);

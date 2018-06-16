@@ -451,9 +451,6 @@ public class EmployeeAttendance extends javax.swing.JPanel {
         dayType = "FullDay";
         if(RadioButtonPrasent.isSelected()){
             RadioButtonLeave.setEnabled(false);
-            CheckBoxHalf.setEnabled(true);
-            ToggleButtonInTime.setEnabled(true);
-            ToggleButtonOutTime.setEnabled(true);
         }else{
             RadioButtonLeave.setEnabled(true);
         }
